@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<title>{{PAGE_TITLE}}</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  :root{
+    --ink:#1C1C1E;
+    --ink2:#3A3A3C;
+    --gray:#8E8E93;
+    --line:#E6E6EA;
+    --bg:#F2F2F4;
+    --card:#FFFFFF;
+    --gold:#C97B0A;
+    --gold-bg:#FDF4E3;
+    --gold-line:#E7C88A;
+    --blue:#2C5FD6;
+    --blue-bg:#EDF2FE;
+    --blue-line:#A9C0EE;
+    --green:#0E8A5F;
+    --radius:16px;
+    --fscale:1;
+  }
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:15px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 手机外框（模拟小程序视口） ===== */
+  .shell{max-width:420px;margin:0 auto;background:var(--card);min-height:100vh;position:relative;overflow-x:hidden;
+    box-shadow:0 0 0 1px rgba(0,0,0,.04), 0 12px 40px rgba(0,0,0,.06);}
+
+  /* ===== 顶部固定栏 ===== */
+  .topbar{
+    position:sticky;top:0;z-index:60;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:saturate(180%) blur(14px);
+    -webkit-backdrop-filter:saturate(180%) blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .tb-row{display:flex;align-items:center;gap:10px;padding:9px 14px 8px;}
+  .tb-back{width:26px;height:26px;display:flex;align-items:center;justify-content:center;color:var(--ink2);font-size:17px;flex:0 0 auto;}
+  .tb-title{flex:1;min-width:0;font-size:13.5px;font-weight:600;color:var(--ink2);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .tb-act{display:flex;align-items:center;gap:8px;flex:0 0 auto;}
+  .fbtn{border:1px solid var(--line);background:#fff;border-radius:8px;height:26px;min-width:30px;
+    font-size:12px;color:var(--ink2);font-weight:600;padding:0 7px;cursor:pointer;font-family:inherit;}
+  .fbtn:active{background:#F0F0F2;}
+  .progress{height:2px;background:transparent;}
+  .progress i{display:block;height:2px;width:0;background:linear-gradient(90deg,#F59E0B,#C97B0A);
+    border-radius:0 2px 2px 0;transition:width .1s linear;}
+
+  /* ===== 封面区 ===== */
+  .hero{padding:20px 18px 14px;border-bottom:1px solid var(--line);
+    background:linear-gradient(168deg,#FFFDF8 0%,#FFFFFF 46%,#FCFCFD 100%);}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+  .chip{font-size:11px;line-height:1;padding:5px 9px;border-radius:999px;font-weight:600;letter-spacing:.2px;}
+  .chip.src{background:var(--ink);color:#fff;}
+  .chip.date{background:#F0F0F2;color:var(--ink2);}
+  .chip.lvl{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-line);}
+  .chip.cat{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-line);}
+
+  h1{font-size:21px;line-height:1.34;margin:0 0 8px;font-weight:800;letter-spacing:-.2px;color:var(--ink);}
+  .sub{font-size:13.5px;line-height:1.6;color:var(--gray);margin:0 0 14px;font-weight:400;}
+  .byline{font-size:12px;color:var(--gray);line-height:1.7;}
+  .byline b{color:var(--ink2);font-weight:600;}
+  .stats{display:flex;gap:0;margin:14px -18px 0;border-top:1px solid var(--line);}
+  .stat{flex:1;text-align:center;padding:11px 4px 2px;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat b{display:block;font-size:16px;font-weight:800;color:var(--ink);letter-spacing:-.3px;}
+  .stat span{display:block;font-size:10.5px;color:var(--gray);margin-top:2px;letter-spacing:.2px;}
+
+  /* ===== 阅读提示 ===== */
+  .hint{margin:14px 14px 0;padding:11px 13px;border-radius:12px;background:#FAFAFB;border:1px solid var(--line);
+    font-size:12.5px;line-height:1.75;color:var(--ink2);}
+  .hint b{color:var(--ink);}
+  .k-vocab{display:inline-block;padding:0 4px;border-radius:4px;background:var(--blue-bg);color:var(--blue);
+    border-bottom:1px dashed var(--blue-line);font-weight:600;}
+  .k-term{display:inline-block;padding:0 4px;border-radius:4px;background:var(--gold-bg);color:var(--gold);
+    border-bottom:1px solid var(--gold-line);font-weight:600;}
+
+  /* ===== 正文 ===== */
+  article{padding:20px 18px 8px;font-family:Georgia,"Iowan Old Style","Times New Roman",serif;
+    font-size:calc(17px * var(--fscale));line-height:1.92;color:var(--ink);letter-spacing:-.1px;}
+  article p{margin:0 0 1.15em;text-align:justify;}
+  article p:first-of-type::first-letter{
+    float:left;font-size:2.9em;line-height:.86;padding:2px 8px 0 0;font-weight:700;color:var(--gold);
+    font-family:Georgia,serif;}
+  .divider{display:flex;justify-content:center;gap:6px;margin:22px 0;color:#C7C7CC;font-size:11px;letter-spacing:4px;}
+
+  /* 高亮词 */
+  .m{cursor:pointer;border-radius:3px;padding:0 1px;transition:background .15s;}
+  .m.v{background:var(--blue-bg);border-bottom:1px dashed var(--blue-line);color:var(--blue);font-weight:500;}
+  .m.t{background:var(--gold-bg);border-bottom:1px solid var(--gold-line);color:var(--gold);font-weight:500;}
+  .m:active{filter:brightness(.94);}
+  .m.done{opacity:.42;text-decoration:line-through;text-decoration-thickness:1px;}
+
+  /* ===== 词汇表 ===== */
+  .gloss{background:#FAFAFB;border-top:1px solid var(--line);padding:20px 18px 26px;}
+  .gloss h2{font-size:15px;margin:0 0 4px;font-weight:800;letter-spacing:-.2px;}
+  .gloss .gsub{font-size:11.5px;color:var(--gray);margin:0 0 13px;}
+  .tabs{display:flex;gap:7px;margin-bottom:13px;}
+  .tab{font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;background:#fff;
+    border:1px solid var(--line);color:var(--gray);cursor:pointer;font-family:inherit;}
+  .tab.on{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .gitem{display:flex;gap:10px;padding:10px 12px;background:#fff;border:1px solid var(--line);
+    border-radius:11px;margin-bottom:7px;cursor:pointer;align-items:flex-start;}
+  .gitem:active{background:#F7F7F9;}
+  .gitem .gw{font-size:13.5px;font-weight:700;color:var(--ink);font-family:Georgia,serif;}
+  .gitem .gcn{font-size:11.5px;color:var(--gray);margin-top:2px;line-height:1.5;}
+  .gitem .go{margin-left:auto;font-size:15px;color:#C7C7CC;flex:0 0 auto;line-height:1.2;}
+  .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px;vertical-align:1px;}
+  .dot.v{background:var(--blue);} .dot.t{background:var(--gold);}
+
+  /* ===== 页脚 ===== */
+  footer{padding:18px 18px 34px;border-top:1px solid var(--line);font-size:11.5px;color:var(--gray);line-height:1.8;}
+  footer a{color:var(--blue);text-decoration:none;word-break:break-all;}
+  .ftmeta{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);}
+  .nextbox{margin-top:14px;padding:12px 13px;border-radius:12px;background:linear-gradient(135deg,#1C1C1E,#3A3A3C);
+    color:#fff;font-size:12px;line-height:1.7;}
+  .nextbox b{color:#F5B946;}
+
+  /* ===== 底部弹层 ===== */
+  .mask{position:fixed;inset:0;background:rgba(0,0,0,.38);opacity:0;pointer-events:none;
+    transition:opacity .22s;z-index:80;}
+  .mask.on{opacity:1;pointer-events:auto;}
+  .sheet{position:fixed;left:50%;bottom:0;transform:translate(-50%,102%);width:100%;max-width:420px;
+    background:#fff;border-radius:20px 20px 0 0;z-index:90;transition:transform .28s cubic-bezier(.22,.9,.28,1);
+    box-shadow:0 -8px 34px rgba(0,0,0,.16);padding:8px 18px calc(22px + env(safe-area-inset-bottom));}
+  .sheet.on{transform:translate(-50%,0);}
+  .drag{width:38px;height:4px;border-radius:2px;background:#D8D8DC;margin:4px auto 14px;}
+  .sh-top{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;}
+  .sh-word{font-size:24px;font-weight:800;font-family:Georgia,serif;letter-spacing:-.4px;}
+  .sh-ipa{font-size:13px;color:var(--gray);font-family:Georgia,serif;}
+  .sh-badge{font-size:10.5px;font-weight:700;padding:4px 8px;border-radius:6px;line-height:1;}
+  .sh-badge.v{background:var(--blue-bg);color:var(--blue);}
+  .sh-badge.t{background:var(--gold-bg);color:var(--gold);}
+  .sh-body{margin-top:12px;}
+  .sh-pos{font-size:11.5px;color:var(--gold);font-weight:700;letter-spacing:.3px;margin-bottom:5px;}
+  .sh-cn{font-size:15.5px;line-height:1.75;color:var(--ink);font-weight:500;}
+  .sh-ex{margin-top:12px;padding:11px 12px;background:#FAFAFB;border-left:3px solid var(--line);
+    border-radius:0 9px 9px 0;font-family:Georgia,serif;font-size:13.5px;line-height:1.75;color:var(--ink2);}
+  .sh-ex .lbl{font-family:-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;
+    color:var(--gray);display:block;margin-bottom:4px;}
+  .sh-btns{display:flex;gap:9px;margin-top:16px;}
+  .btn{flex:1;height:42px;border-radius:11px;border:1px solid var(--line);background:#fff;color:var(--ink2);
+    font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;}
+  .btn.primary{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .btn:active{opacity:.82;}
+  .btn.ok{background:var(--green);border-color:var(--green);color:#fff;}
+
+  .toast{position:fixed;left:50%;bottom:88px;transform:translate(-50%,14px);background:rgba(28,28,30,.94);
+    color:#fff;font-size:12.5px;padding:9px 15px;border-radius:999px;opacity:0;pointer-events:none;
+    transition:all .24s;z-index:100;white-space:nowrap;}
+  .toast.on{opacity:1;transform:translate(-50%,0);}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- 顶部栏 -->
+  <div class="topbar">
+    <div class="tb-row">
+      <div class="tb-back">‹</div>
+      <div class="tb-title">{{EPISODE}}</div>
+      <div class="tb-act">
+        <button class="fbtn" id="fdown">A−</button>
+        <button class="fbtn" id="fup">A+</button>
+      </div>
+    </div>
+    <div class="progress"><i id="bar"></i></div>
+  </div>
+
+  <!-- 封面 -->
+  <header class="hero">
+    <div class="chips">
+      <span class="chip src">{{SOURCE}}</span>
+      <span class="chip cat">{{CATEGORY}}</span>
+      <span class="chip date">{{DATE}}</span>
+      <span class="chip lvl">{{LEVEL}}</span>
+    </div>
+    <h1>{{TITLE}}</h1>
+    <p class="sub">{{SUBTITLE}}</p>
+    <div class="byline">{{BYLINE}}</div>
+    <div class="stats">
+      <div class="stat"><b>{{WORDS}}</b><span>词数 WORDS</span></div>
+      <div class="stat"><b>{{MINUTES}}</b><span>分钟 MIN</span></div>
+      <div class="stat"><b id="vcount">0</b><span>生词 VOCAB</span></div>
+      <div class="stat"><b id="tcount">0</b><span>术语 TERMS</span></div>
+    </div>
+  </header>
+
+  <!-- 阅读提示 -->
+  <div class="hint">
+    <b>怎么用：</b>文中<span class="k-vocab">蓝色虚线</span>是通用生词，<span class="k-term">金色实线</span>是专业术语/专有名词。
+    <b>点一下</b>任意高亮词，弹出释义卡（音标 · 词性 · 中文 · 例句），可标记「已掌握」。右上角可调字号。
+  </div>
+
+  <!-- 正文 -->
+  <article id="art">
+{{BODY_HTML}}
+  </article>
+
+  <!-- 词汇表 -->
+  <section class="gloss">
+    <h2>本期词汇表</h2>
+    <p class="gsub">点任意条目查看完整释义卡 · 标记已掌握后可隐藏复习</p>
+    <div class="tabs">
+      <button class="tab on" data-tab="v">通用生词 <span id="tv"></span></button>
+      <button class="tab" data-tab="t">专业术语 <span id="tt"></span></button>
+    </div>
+    <div id="glist"></div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer>
+    <b style="color:#1C1C1E;">原文来源</b><br>
+    {{SOURCE_FULL}}<br>
+    <a href="{{SOURCE_URL}}">{{SOURCE_URL_TEXT}}</a>
+    <div class="ftmeta">
+      本文为每日英语阅读推荐，仅作语言学习用途，版权归原作者与出版方所有。生词释义由编辑整理，例句均为改写示例句。<br>
+      本期选文共 <b>{{WORDS}}</b> 词，符合 1000–2000 词精读区间。
+    </div>
+    <div class="nextbox">
+      <b>下一期预告</b><br>
+      {{NEXT_HINT}}
+    </div>
+  </footer>
+</div>
+
+<!-- 底部弹层 -->
+<div class="mask" id="mask"></div>
+<div class="sheet" id="sheet">
+  <div class="drag"></div>
+  <div class="sh-top">
+    <span class="sh-word" id="shw">word</span>
+    <span class="sh-ipa" id="shipa"></span>
+    <span class="sh-badge v" id="shbadge">生词</span>
+  </div>
+  <div class="sh-body">
+    <div class="sh-pos" id="shpos"></div>
+    <div class="sh-cn" id="shcn"></div>
+    <div class="sh-ex" id="shex"></div>
+  </div>
+  <div class="sh-btns">
+    <button class="btn primary" id="shmark">标记已掌握</button>
+    <button class="btn" id="shclose">关闭</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ 词条数据 ============ */
+var W = {{VOCAB_JSON}};
+
+/* ============ 状态 ============ */
+var done = {};
+var curWord = null;
+
+/* ============ 滚动进度 ============ */
+var bar = document.getElementById('bar');
+window.addEventListener('scroll', function(){
+  var h = document.documentElement.scrollHeight - window.innerHeight;
+  var p = h > 0 ? (window.scrollY / h) * 100 : 0;
+  bar.style.width = Math.min(100, Math.max(0, p)) + '%';
+}, {passive:true});
+
+/* ============ 字号 ============ */
+var scale = 1;
+function applyScale(){
+  document.documentElement.style.setProperty('--fscale', scale);
+  curWord = curWord; // no-op
+}
+document.getElementById('fup').onclick = function(){ scale = Math.min(1.4, scale + 0.08); applyScale(); toast('正文字号 ' + Math.round(scale*100) + '%'); };
+document.getElementById('fdown').onclick = function(){ scale = Math.max(0.82, scale - 0.08); applyScale(); toast('正文字号 ' + Math.round(scale*100) + '%'); };
+
+/* ============ 提示条 ============ */
+var toastEl = document.getElementById('toast'), tTimer = null;
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('on');
+  clearTimeout(tTimer);
+  tTimer = setTimeout(function(){ toastEl.classList.remove('on'); }, 1500);
+}
+
+/* ============ 弹层 ============ */
+var mask = document.getElementById('mask'), sheet = document.getElementById('sheet');
+function openSheet(key){
+  var d = W[key];
+  if(!d) return;
+  curWord = key;
+  document.getElementById('shw').textContent = d.w;
+  document.getElementById('shipa').textContent = d.ipa;
+  var bd = document.getElementById('shbadge');
+  bd.textContent = d.t === 't' ? '专业术语' : '通用生词';
+  bd.className = 'sh-badge ' + d.t;
+  document.getElementById('shpos').textContent = d.pos;
+  document.getElementById('shcn').textContent = d.cn;
+  document.getElementById('shex').innerHTML = '<span class="lbl">EXAMPLE</span>' + d.ex;
+  var mb = document.getElementById('shmark');
+  mb.textContent = done[key] ? '取消标记' : '标记已掌握';
+  mb.className = 'btn ' + (done[key] ? 'ok' : 'primary');
+  mask.classList.add('on');
+  sheet.classList.add('on');
+}
+function closeSheet(){ mask.classList.remove('on'); sheet.classList.remove('on'); curWord = null; }
+mask.onclick = closeSheet;
+document.getElementById('shclose').onclick = closeSheet;
+
+document.getElementById('shmark').onclick = function(){
+  if(!curWord) return;
+  if(done[curWord]){ delete done[curWord]; toast('已取消标记'); }
+  else { done[curWord] = 1; toast('已标记为掌握 ✓'); }
+  paintDone();
+  renderList(curTab);
+  closeSheet();
+};
+
+/* 正文点击 */
+document.querySelectorAll('.m').forEach(function(el){
+  el.addEventListener('click', function(){
+    var k = el.getAttribute('data-w');
+    if(done[k]) { toast('已标记掌握，长按可取消'); }
+    openSheet(k);
+  });
+  el.addEventListener('contextmenu', function(e){
+    e.preventDefault();
+    var k = el.getAttribute('data-w');
+    if(k) openSheet(k);
+  });
+});
+
+function paintDone(){
+  document.querySelectorAll('.m').forEach(function(el){
+    var k = el.getAttribute('data-w');
+    if(done[k]) el.classList.add('done'); else el.classList.remove('done');
+  });
+}
+
+/* ============ 词汇表 ============ */
+var curTab = 'v';
+function renderList(tab){
+  curTab = tab;
+  var host = document.getElementById('glist');
+  var keys = Object.keys(W).filter(function(k){ return W[k].t === tab; });
+  var html = '';
+  keys.forEach(function(k){
+    var d = W[k];
+    var isDone = !!done[k];
+    html += '<div class="gitem" data-k="' + k + '">'
+      + '<span class="dot ' + d.t + '"></span>'
+      + '<div style="flex:1;min-width:0;">'
+      +   '<div class="gw" style="' + (isDone ? 'text-decoration:line-through;opacity:.45;' : '') + '">' + d.w + '</div>'
+      +   '<div class="gcn">' + d.pos + ' · ' + d.cn.split('。')[0] + '。</div>'
+      + '</div>'
+      + '<span class="go">›</span>'
+      + '</div>';
+  });
+  host.innerHTML = html;
+  host.querySelectorAll('.gitem').forEach(function(el){
+    el.onclick = function(){ openSheet(el.getAttribute('data-k')); };
+  });
+}
+document.querySelectorAll('.tab').forEach(function(b){
+  b.onclick = function(){
+    document.querySelectorAll('.tab').forEach(function(x){ x.classList.remove('on'); });
+    b.classList.add('on');
+    renderList(b.getAttribute('data-tab'));
+  };
+});
+
+/* 计数 */
+var vc = 0, tc = 0;
+Object.keys(W).forEach(function(k){ W[k].t === 't' ? tc++ : vc++; });
+document.getElementById('vcount').textContent = vc;
+document.getElementById('tcount').textContent = tc;
+document.getElementById('tv').textContent = '(' + vc + ')';
+document.getElementById('tt').textContent = '(' + tc + ')';
+renderList('v');
+</script>
+</body>
+</html>

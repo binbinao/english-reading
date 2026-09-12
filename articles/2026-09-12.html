@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<title>每日英文精读 · 2026-09-12 · Scientific American</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  :root{
+    --ink:#1C1C1E;
+    --ink2:#3A3A3C;
+    --gray:#8E8E93;
+    --line:#E6E6EA;
+    --bg:#F2F2F4;
+    --card:#FFFFFF;
+    --gold:#C97B0A;
+    --gold-bg:#FDF4E3;
+    --gold-line:#E7C88A;
+    --blue:#2C5FD6;
+    --blue-bg:#EDF2FE;
+    --blue-line:#A9C0EE;
+    --green:#0E8A5F;
+    --radius:16px;
+    --fscale:1;
+  }
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:15px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 手机外框（模拟小程序视口） ===== */
+  .shell{max-width:420px;margin:0 auto;background:var(--card);min-height:100vh;position:relative;overflow-x:hidden;
+    box-shadow:0 0 0 1px rgba(0,0,0,.04), 0 12px 40px rgba(0,0,0,.06);}
+
+  /* ===== 顶部固定栏 ===== */
+  .topbar{
+    position:sticky;top:0;z-index:60;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:saturate(180%) blur(14px);
+    -webkit-backdrop-filter:saturate(180%) blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .tb-row{display:flex;align-items:center;gap:10px;padding:9px 14px 8px;}
+  .tb-back{width:26px;height:26px;display:flex;align-items:center;justify-content:center;color:var(--ink2);font-size:17px;flex:0 0 auto;}
+  .tb-title{flex:1;min-width:0;font-size:13.5px;font-weight:600;color:var(--ink2);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .tb-act{display:flex;align-items:center;gap:8px;flex:0 0 auto;}
+  .fbtn{border:1px solid var(--line);background:#fff;border-radius:8px;height:26px;min-width:30px;
+    font-size:12px;color:var(--ink2);font-weight:600;padding:0 7px;cursor:pointer;font-family:inherit;}
+  .fbtn:active{background:#F0F0F2;}
+  .progress{height:2px;background:transparent;}
+  .progress i{display:block;height:2px;width:0;background:linear-gradient(90deg,#F59E0B,#C97B0A);
+    border-radius:0 2px 2px 0;transition:width .1s linear;}
+
+  /* ===== 封面区 ===== */
+  .hero{padding:20px 18px 14px;border-bottom:1px solid var(--line);
+    background:linear-gradient(168deg,#FFFDF8 0%,#FFFFFF 46%,#FCFCFD 100%);}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+  .chip{font-size:11px;line-height:1;padding:5px 9px;border-radius:999px;font-weight:600;letter-spacing:.2px;}
+  .chip.src{background:var(--ink);color:#fff;}
+  .chip.date{background:#F0F0F2;color:var(--ink2);}
+  .chip.lvl{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-line);}
+  .chip.cat{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-line);}
+
+  h1{font-size:21px;line-height:1.34;margin:0 0 8px;font-weight:800;letter-spacing:-.2px;color:var(--ink);}
+  .sub{font-size:13.5px;line-height:1.6;color:var(--gray);margin:0 0 14px;font-weight:400;}
+  .byline{font-size:12px;color:var(--gray);line-height:1.7;}
+  .byline b{color:var(--ink2);font-weight:600;}
+  .stats{display:flex;gap:0;margin:14px -18px 0;border-top:1px solid var(--line);}
+  .stat{flex:1;text-align:center;padding:11px 4px 2px;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat b{display:block;font-size:16px;font-weight:800;color:var(--ink);letter-spacing:-.3px;}
+  .stat span{display:block;font-size:10.5px;color:var(--gray);margin-top:2px;letter-spacing:.2px;}
+
+  /* ===== 阅读提示 ===== */
+  .hint{margin:14px 14px 0;padding:11px 13px;border-radius:12px;background:#FAFAFB;border:1px solid var(--line);
+    font-size:12.5px;line-height:1.75;color:var(--ink2);}
+  .hint b{color:var(--ink);}
+  .k-vocab{display:inline-block;padding:0 4px;border-radius:4px;background:var(--blue-bg);color:var(--blue);
+    border-bottom:1px dashed var(--blue-line);font-weight:600;}
+  .k-term{display:inline-block;padding:0 4px;border-radius:4px;background:var(--gold-bg);color:var(--gold);
+    border-bottom:1px solid var(--gold-line);font-weight:600;}
+
+  /* ===== 正文 ===== */
+  article{padding:20px 18px 8px;font-family:Georgia,"Iowan Old Style","Times New Roman",serif;
+    font-size:calc(17px * var(--fscale));line-height:1.92;color:var(--ink);letter-spacing:-.1px;}
+  article p{margin:0 0 1.15em;text-align:justify;}
+  article p:first-of-type::first-letter{
+    float:left;font-size:2.9em;line-height:.86;padding:2px 8px 0 0;font-weight:700;color:var(--gold);
+    font-family:Georgia,serif;}
+  .divider{display:flex;justify-content:center;gap:6px;margin:22px 0;color:#C7C7CC;font-size:11px;letter-spacing:4px;}
+
+  /* 高亮词 */
+  .m{cursor:pointer;border-radius:3px;padding:0 1px;transition:background .15s;}
+  .m.v{background:var(--blue-bg);border-bottom:1px dashed var(--blue-line);color:var(--blue);font-weight:500;}
+  .m.t{background:var(--gold-bg);border-bottom:1px solid var(--gold-line);color:var(--gold);font-weight:500;}
+  .m:active{filter:brightness(.94);}
+  .m.done{opacity:.42;text-decoration:line-through;text-decoration-thickness:1px;}
+
+  /* ===== 词汇表 ===== */
+  .gloss{background:#FAFAFB;border-top:1px solid var(--line);padding:20px 18px 26px;}
+  .gloss h2{font-size:15px;margin:0 0 4px;font-weight:800;letter-spacing:-.2px;}
+  .gloss .gsub{font-size:11.5px;color:var(--gray);margin:0 0 13px;}
+  .tabs{display:flex;gap:7px;margin-bottom:13px;}
+  .tab{font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;background:#fff;
+    border:1px solid var(--line);color:var(--gray);cursor:pointer;font-family:inherit;}
+  .tab.on{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .gitem{display:flex;gap:10px;padding:10px 12px;background:#fff;border:1px solid var(--line);
+    border-radius:11px;margin-bottom:7px;cursor:pointer;align-items:flex-start;}
+  .gitem:active{background:#F7F7F9;}
+  .gitem .gw{font-size:13.5px;font-weight:700;color:var(--ink);font-family:Georgia,serif;}
+  .gitem .gcn{font-size:11.5px;color:var(--gray);margin-top:2px;line-height:1.5;}
+  .gitem .go{margin-left:auto;font-size:15px;color:#C7C7CC;flex:0 0 auto;line-height:1.2;}
+  .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px;vertical-align:1px;}
+  .dot.v{background:var(--blue);} .dot.t{background:var(--gold);}
+
+  /* ===== 页脚 ===== */
+  footer{padding:18px 18px 34px;border-top:1px solid var(--line);font-size:11.5px;color:var(--gray);line-height:1.8;}
+  footer a{color:var(--blue);text-decoration:none;word-break:break-all;}
+  .ftmeta{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);}
+  .nextbox{margin-top:14px;padding:12px 13px;border-radius:12px;background:linear-gradient(135deg,#1C1C1E,#3A3A3C);
+    color:#fff;font-size:12px;line-height:1.7;}
+  .nextbox b{color:#F5B946;}
+
+  /* ===== 底部弹层 ===== */
+  .mask{position:fixed;inset:0;background:rgba(0,0,0,.38);opacity:0;pointer-events:none;
+    transition:opacity .22s;z-index:80;}
+  .mask.on{opacity:1;pointer-events:auto;}
+  .sheet{position:fixed;left:50%;bottom:0;transform:translate(-50%,102%);width:100%;max-width:420px;
+    background:#fff;border-radius:20px 20px 0 0;z-index:90;transition:transform .28s cubic-bezier(.22,.9,.28,1);
+    box-shadow:0 -8px 34px rgba(0,0,0,.16);padding:8px 18px calc(22px + env(safe-area-inset-bottom));}
+  .sheet.on{transform:translate(-50%,0);}
+  .drag{width:38px;height:4px;border-radius:2px;background:#D8D8DC;margin:4px auto 14px;}
+  .sh-top{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;}
+  .sh-word{font-size:24px;font-weight:800;font-family:Georgia,serif;letter-spacing:-.4px;}
+  .sh-ipa{font-size:13px;color:var(--gray);font-family:Georgia,serif;}
+  .sh-badge{font-size:10.5px;font-weight:700;padding:4px 8px;border-radius:6px;line-height:1;}
+  .sh-badge.v{background:var(--blue-bg);color:var(--blue);}
+  .sh-badge.t{background:var(--gold-bg);color:var(--gold);}
+  .sh-body{margin-top:12px;}
+  .sh-pos{font-size:11.5px;color:var(--gold);font-weight:700;letter-spacing:.3px;margin-bottom:5px;}
+  .sh-cn{font-size:15.5px;line-height:1.75;color:var(--ink);font-weight:500;}
+  .sh-ex{margin-top:12px;padding:11px 12px;background:#FAFAFB;border-left:3px solid var(--line);
+    border-radius:0 9px 9px 0;font-family:Georgia,serif;font-size:13.5px;line-height:1.75;color:var(--ink2);}
+  .sh-ex .lbl{font-family:-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;
+    color:var(--gray);display:block;margin-bottom:4px;}
+  .sh-btns{display:flex;gap:9px;margin-top:16px;}
+  .btn{flex:1;height:42px;border-radius:11px;border:1px solid var(--line);background:#fff;color:var(--ink2);
+    font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;}
+  .btn.primary{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .btn:active{opacity:.82;}
+  .btn.ok{background:var(--green);border-color:var(--green);color:#fff;}
+
+  .toast{position:fixed;left:50%;bottom:88px;transform:translate(-50%,14px);background:rgba(28,28,30,.94);
+    color:#fff;font-size:12.5px;padding:9px 15px;border-radius:999px;opacity:0;pointer-events:none;
+    transition:all .24s;z-index:100;white-space:nowrap;}
+  .toast.on{opacity:1;transform:translate(-50%,0);}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- 顶部栏 -->
+  <div class="topbar">
+    <div class="tb-row">
+      <div class="tb-back">‹</div>
+      <div class="tb-title">每日英文精读 · 第 001 期</div>
+      <div class="tb-act">
+        <button class="fbtn" id="fdown">A−</button>
+        <button class="fbtn" id="fup">A+</button>
+      </div>
+    </div>
+    <div class="progress"><i id="bar"></i></div>
+  </div>
+
+  <!-- 封面 -->
+  <header class="hero">
+    <div class="chips">
+      <span class="chip src">Scientific American</span>
+      <span class="chip cat">AI · 数学</span>
+      <span class="chip date">2026-09-08</span>
+      <span class="chip lvl">CEFR B2–C1</span>
+    </div>
+    <h1>AI may have just solved a million-dollar math problem. The field will never be the same</h1>
+    <p class="sub">A mathematician compared the feat to the history-making chess competition in which IBM's Deep Blue computer beat Garry Kasparov in 1997</p>
+    <div class="byline"><b>By Joseph Howlett</b> · edited by Clara Moskowitz &amp; Claire Cameron<br>《科学美国人》 · 科学新闻</div>
+    <div class="stats">
+      <div class="stat"><b>1,136</b><span>词数 WORDS</span></div>
+      <div class="stat"><b>≈6</b><span>分钟 MIN</span></div>
+      <div class="stat"><b id="vcount">28</b><span>生词 VOCAB</span></div>
+      <div class="stat"><b id="tcount">8</b><span>术语 TERMS</span></div>
+    </div>
+  </header>
+
+  <!-- 阅读提示 -->
+  <div class="hint">
+    <b>怎么用：</b>文中<span class="k-vocab">蓝色虚线</span>是通用生词，<span class="k-term">金色实线</span>是专业术语/专有名词。
+    <b>点一下</b>任意高亮词，弹出释义卡（音标 · 词性 · 中文 · 例句），可标记「已掌握」。右上角可调字号。
+  </div>
+
+  <!-- 正文 -->
+  <article id="art">
+    <p>Today may go down as the biggest day in math in at least two decades, if not far longer.</p>
+
+    <p>In a development that <span class="m v" data-w="crystallize">crystallizes</span> an <span class="m v" data-w="existential">existential</span> shift in humankind's oldest intellectual discipline, artificial intelligence has <span class="m v" data-w="reportedly">reportedly</span> solved one of the six open <span class="m t" data-w="mdr">"million-dollar" problems</span> in mathematics. The achievement proves that the equations that govern the motion of fluids are fundamentally flawed.</p>
+
+    <p>"This is a <span class="m t" data-w="deepblue">Deep Blue&ndash;Kasparov moment</span>," wrote mathematician Tristan Buckmaster, referring to the <span class="m v" data-w="seachange">sea change</span> in thinking about machine intelligence that occurred when a supercomputer beat world champion Garry Kasparov at chess in the 1990s, in a statement released late on Monday. "The community needs to have serious and unhurried discussion about where to go from here."</p>
+
+    <p>But according to Buckmaster, the proof's origins may be <span class="m v" data-w="murky">murkier</span> than they seem. In the same statement, he wrote that he and Levent Alp&ouml;ge, a mathematician and an Anthropic employee, made significant progress toward the problem last month. But before the pair could publish, Buckmaster <span class="m v" data-w="allege">alleged</span> in the statement, rumors of their method reached OpenAI, where researchers used the company's large language model (LLM) to finish the job with a single prompt. The prompt "had been sent in the past few days, after information about our work had reached OpenAI," Buckmaster alleged.</p>
+
+    <p>OpenAI did not immediately respond to a request for comment; in a press conference later on Tuesday, the firm denied the allegations.</p>
+
+    <p>The mathematical problem concerns the <span class="m t" data-w="ns">Navier-Stokes equations</span>, which govern the flow of fluids&mdash;from the whirlpool circling your bathtub's drain to the <span class="m v" data-w="turbulent">turbulent</span> winds El Ni&ntilde;o hurls across the North American continent. After two centuries of study, mathematicians haven't been able to figure out whether these equations perfectly describe reality in every situation or if they sometimes admit <span class="m v" data-w="aberrant">aberrant</span> mathematical blips that could never happen in a real fluid. Answering this <span class="m v" data-w="quandary">quandary</span> has been viewed as so beyond the reach of existing mathematics that the <span class="m t" data-w="clay">Clay Mathematics Institute</span> has offered $1 million to anyone who does it.</p>
+
+    <p>Over the past few years, two mathematicians, Diego C&oacute;rdoba and Luis Mart&iacute;nez-Zoroa, worked out a potential trick to break the equations&mdash;or <span class="m v" data-w="blowup">"blow them up,"</span> as such an achievement is described in math. They called the method "forcing." It focuses on a part of the equations, as written in the Clay problem, that mathematicians previously <span class="m v" data-w="deem">deemed</span> <span class="m v" data-w="inconsequential">inconsequential</span>. In fact, most experts typically write the problem without this term, assuming that any blowup should be the same with or without it. But C&oacute;rdoba and Mart&iacute;nez-Zoroa realized there might be a way to break the equations solely by using this often <span class="m v" data-w="overlook">overlooked</span> piece.</p>
+
+    <p>About a year ago, Buckmaster took up C&oacute;rdoba and Mart&iacute;nez-Zoroa's approach, working with Alp&ouml;ge and using LLMs from OpenAI's rival company Anthropic to parse through the mathematical possibilities. Progress was slow, according to Buckmaster's statement, until August 15, when he and Alp&ouml;ge used the method to prove that the Navier-Stokes equations' simpler, <span class="m v" data-w="frictionless">frictionless</span> cousins, the <span class="m t" data-w="euler">Euler equations</span>, did in fact blow up.</p>
+
+    <p>This finding, on its own, is a <span class="m v" data-w="monumental">monumental</span> mathematical achievement that is worthy of any award in math and a key step toward solving the Navier-Stokes problem. Buckmaster and Alp&ouml;ge were able to verify that the proof was correct using the programming language <span class="m t" data-w="lean">Lean</span>, but the English-language explanation the LLMs produced was barely readable, according to Buckmaster. The pair started trying to make sense of the mathematical steps one by one and wrote them in a way other researchers would be able to <span class="m v" data-w="digest">digest</span>.</p>
+
+    <p>According to Buckmaster, rumors of their work reached OpenAI at some point in the past week, and the company apparently had a team that was already working on the problem. But after becoming aware of the pair's work, he alleged, OpenAI focused its attention on "forcing"&mdash;the often-ignored piece of the Clay problem. In a major effort over last weekend, the OpenAI team apparently used an internal model to take the result further, blowing up the full Navier-Stokes equations, according to Buckmaster.</p>
+
+    <p>Buckmaster wrote in his statement that he spoke on the phone on Sunday with S&eacute;bastien Bubeck, who leads OpenAI's math team, and another unnamed OpenAI employee. Buckmaster alleged that the call became <span class="m v" data-w="contentious">contentious</span>, with OpenAI offering him <span class="m v" data-w="soleauthorship">sole authorship</span> for the Navier-Stokes result in a paper that would acknowledge that the company's internal model had solved it. Bubeck allegedly wanted to <span class="m v" data-w="exclude">exclude</span> Alp&ouml;ge, an employee of OpenAI's competitor, according to Buckmaster. He asserted that he threatened to inform the media and alleged that "the reply was 'Why would you ruin your career?'" according to the statement.</p>
+
+    <p>At 11:58 P.M. EDT on Monday, Buckmaster posted his and Alp&ouml;ge's results, along with the statement laying out his account of events. According to the statement, he does not know how the OpenAI team so quickly <span class="m v" data-w="reconstruct">reconstructed</span> the details of its approach. Buckmaster wrote that he asked Bubeck if the OpenAI LLM was given access to his personal prompts to the company's model Codex, which he and Alp&ouml;ge were using throughout the process and thought were private. Bubeck told him no but wouldn't answer whether the model's training involved user data, which might have included Buckmaster and Alp&ouml;ge's private prompts, Buckmaster alleged.</p>
+
+    <div class="divider">&#9679; &#9679; &#9679;</div>
+
+    <p>Beyond the <span class="m v" data-w="jockeying">jockeying for credit</span> among the AI <span class="m v" data-w="vanguard">vanguard</span> and the implications for the future of mathematics as a human <span class="m v" data-w="vocation">vocation</span>, there's a mathematical issue. The Clay problem, as written, is solved. But the Clay problem, as many experts imagine it, lacks the piece that the forcing method relies on. Moreover, because this element is so crucial to the method, it's not clear whether there's any way to extend the proof to blow up the Navier-Stokes equations without it. Some in the community may say that the problem hasn't really been solved or that this has only been achieved through a <span class="m v" data-w="loophole">loophole</span>. That leaves the Clay Institute, and the field of mathematics, in a bit of a quandary. In any case, Buckmaster is <span class="m v" data-w="emphatic">emphatic</span> that the key ideas be credited to Mart&iacute;nez-Zoroa and C&oacute;rdoba. "I believe Luis Mart&iacute;nez-Zoroa deserves a <span class="m t" data-w="fields">Fields Medal</span>," he wrote in his statement.</p>
+
+    <p>Ultimately, math may never be the same. AI companies have <span class="m v" data-w="fixate">fixated on</span> using their technology to solve math problems for more than a year. Because the field's focus on objectivity aligns with these companies' goal of developing <span class="m v" data-w="superhuman">superhuman intelligence</span>, they've been pushing their models to do math that no human can faster than any human can. It appears they've succeeded.</p>
+
+    <p>"There is a far bigger story here than the one in my statement: the <span class="m v" data-w="magnitude">sheer magnitude</span> of what <span class="m t" data-w="frontier">frontier models</span> can now do, and what that means for us all," Buckmaster wrote on Mastodon a little before 6 A.M. EDT on Tuesday. "I hope the labs can see this and set the <span class="m v" data-w="petty">petty posturing</span> aside."</p>
+
+    <p style="font-family:-apple-system,sans-serif;font-size:12px;line-height:1.75;color:#8E8E93;border-top:1px dashed #E6E6EA;padding-top:14px;margin-top:22px;">
+      <em>Editor's Note (9/8/26): This is a breaking news story and will be updated.</em>
+    </p>
+  </article>
+
+  <!-- 词汇表 -->
+  <section class="gloss">
+    <h2>本期词汇表</h2>
+    <p class="gsub">点任意条目查看完整释义卡 · 标记已掌握后可隐藏复习</p>
+    <div class="tabs">
+      <button class="tab on" data-tab="v">通用生词 <span id="tv"></span></button>
+      <button class="tab" data-tab="t">专业术语 <span id="tt"></span></button>
+    </div>
+    <div id="glist"></div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer>
+    <b style="color:#1C1C1E;">原文来源</b><br>
+    Scientific American · Joseph Howlett · 2026-09-08<br>
+    <a href="https://www.scientificamerican.com/article/ai-may-have-just-solved-a-million-dollar-math-problem-the-field-will-never-be-the-same/">scientificamerican.com/article/ai-may-have-just-solved-a-million-dollar-math-problem...</a>
+    <div class="ftmeta">
+      本文为每日英语阅读推荐，仅作语言学习用途，版权归原作者与出版方所有。生词释义由编辑整理，例句均为改写示例句。<br>
+      本期选文共 <b>1,136</b> 词，符合 1000–2000 词精读区间。
+    </div>
+    <div class="nextbox">
+      <b>下一期预告</b><br>
+      候选池：The Economist《AI was supposed to destroy jobs. It's doing the opposite》· 科学美国人《If AI can do math, what's the point of mathematicians?》（3,423 词长文，如需完整版可单独索取）。
+    </div>
+  </footer>
+</div>
+
+<!-- 底部弹层 -->
+<div class="mask" id="mask"></div>
+<div class="sheet" id="sheet">
+  <div class="drag"></div>
+  <div class="sh-top">
+    <span class="sh-word" id="shw">word</span>
+    <span class="sh-ipa" id="shipa"></span>
+    <span class="sh-badge v" id="shbadge">生词</span>
+  </div>
+  <div class="sh-body">
+    <div class="sh-pos" id="shpos"></div>
+    <div class="sh-cn" id="shcn"></div>
+    <div class="sh-ex" id="shex"></div>
+  </div>
+  <div class="sh-btns">
+    <button class="btn primary" id="shmark">标记已掌握</button>
+    <button class="btn" id="shclose">关闭</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ 词条数据 ============ */
+var W = {
+  crystallize:{t:"v",w:"crystallize",ipa:"/ˈkrɪstəlaɪz/",pos:"v. 动词",cn:"（使）明确化、成形；让原本模糊的趋势凝结为清晰的事实。本句指这则消息把一场早已发生的转变彻底坐实。",ex:"The report crystallizes a shift that has been under way for years."},
+  existential:{t:"v",w:"existential",ipa:"/ˌeɡzɪˈstenʃl/",pos:"adj. 形容词",cn:"关乎存亡的、存在性的。常与 threat / crisis / question 搭配，表示威胁到「是否还能继续存在」本身。",ex:"The rise of AI poses an existential question for the profession."},
+  reportedly:{t:"v",w:"reportedly",ipa:"/rɪˈpɔːtɪdli/",pos:"adv. 副词",cn:"据报道、据说。新闻常用，用来表明信息来自他人陈述而非记者亲证——暗示结论尚未被独立确认。",ex:"The model reportedly finished the proof in under four days."},
+  seachange:{t:"v",w:"sea change",ipa:"/ˈsiː tʃeɪndʒ/",pos:"n. 名词短语",cn:"根本性的转变、翻天覆地的变化。源自莎士比亚《暴风雨》，字面是被海水彻底改变的形态。",ex:"The internet brought a sea change in how research is shared."},
+  murky:{t:"v",w:"murky（murkier）",ipa:"/ˈmɜːki/",pos:"adj. 形容词（比较级）",cn:"浑浊的、模糊不清的；引申为来路不明、难以查证。murkier 是它的比较级。",ex:"The origins of the result are murkier than they first appear."},
+  allege:{t:"v",w:"allege",ipa:"/əˈledʒ/",pos:"v. 动词",cn:"指称、声称（尚未证实）。法律与新闻高频词，表示「有人这么说，但未经证实」，必须保持中立语气。",ex:"He alleged that the company used his private prompts."},
+  turbulent:{t:"v",w:"turbulent",ipa:"/ˈtɜːbjələnt/",pos:"adj. 形容词",cn:"湍流的、剧烈扰动的；也形容动荡不安的局面。本处是流体力学本义。",ex:"Turbulent flow is far harder to model than smooth flow."},
+  aberrant:{t:"v",w:"aberrant",ipa:"/æˈberənt/",pos:"adj. 形容词",cn:"异常的、偏离常轨的。学术写作里常指「不该出现却出现了」的偏差。",ex:"The equations may admit aberrant solutions that no real fluid shows."},
+  quandary:{t:"v",w:"quandary",ipa:"/ˈkwɒndəri/",pos:"n. 名词",cn:"困境、进退两难的局面。强调「怎么选都不舒服」，比 problem 更侧重选择困境。",ex:"Verify or not — the institute faces a real quandary."},
+  blowup:{t:"v",w:"blow up",ipa:"/bləʊ ʌp/",pos:"phr. 短语动词",cn:"本义爆炸；在偏微分方程中特指「解在有限时间内发散到无穷」。原文加了引号，表示这是数学圈的行话（blowup）。",ex:"Mathematicians still debate whether the equations can blow up."},
+  deem:{t:"v",w:"deem",ipa:"/diːm/",pos:"v. 动词",cn:"认为、视为（正式用法）。法律文书常见，语气比 consider 更庄重。",ex:"The term was long deemed irrelevant to the problem."},
+  inconsequential:{t:"v",w:"inconsequential",ipa:"/ɪnˌkɒnsɪˈkwenʃl/",pos:"adj. 形容词",cn:"无足轻重的、无关紧要的。反义词是 consequential（有重大影响的）。",ex:"Experts treated that term as inconsequential — until it wasn't."},
+  overlook:{t:"v",w:"overlook",ipa:"/ˌəʊvəˈlʊk/",pos:"v. 动词",cn:"忽略、漏看；也指「俯视」。此处是「长期被忽视」之意。",ex:"The breakthrough came from an overlooked piece of the equation."},
+  frictionless:{t:"v",w:"frictionless",ipa:"/ˈfrɪkʃənləs/",pos:"adj. 形容词",cn:"无摩擦的；引申为顺畅无阻的。物理中摩擦为零的理想化条件。",ex:"The Euler equations describe an idealized, frictionless fluid."},
+  monumental:{t:"v",w:"monumental",ipa:"/ˌmɒnjuˈmentl/",pos:"adj. 形容词",cn:"里程碑式的、极其重大的；字面是「纪念碑般的」。",ex:"Even the partial result is a monumental achievement."},
+  digest:{t:"v",w:"digest",ipa:"/daɪˈdʒest/",pos:"v. 动词",cn:"消化、理解吸收（信息）。作动词重音在后；作名词（摘要）重音在前。",ex:"The machine's explanation was correct but almost impossible to digest."},
+  contentious:{t:"v",w:"contentious",ipa:"/kənˈtenʃəs/",pos:"adj. 形容词",cn:"引起争议的、剑拔弩张的。既可形容议题（有争议），也可形容气氛（火药味浓）。",ex:"The phone call between the two sides became contentious."},
+  soleauthorship:{t:"v",w:"sole authorship",ipa:"/səʊl ˈɔːθəʃɪp/",pos:"n. 名词短语",cn:"唯一作者署名。学术语境里直接关系credit（功劳归属）与职业生涯。sole = 唯一的。",ex:"They offered him sole authorship if he agreed to the terms."},
+  exclude:{t:"v",w:"exclude",ipa:"/ɪkˈskluːd/",pos:"v. 动词",cn:"排除、把……排除在外。反义 include。",ex:"He wanted to exclude the co-author from the paper."},
+  reconstruct:{t:"v",w:"reconstruct",ipa:"/ˌriːkənˈstrʌkt/",pos:"v. 动词",cn:"重建、还原（过程、事件）。这里的疑问是：对方为何能如此迅速地还原出他们的思路。",ex:"No one knows how the team reconstructed their method so fast."},
+  jockeying:{t:"v",w:"jockey for credit",ipa:"/ˈdʒɒki fə ˈkredɪt/",pos:"phr. 习语",cn:"争夺功劳、明争暗斗地抢位置。jockey 原指赛马骑手抢位，引申为「用手段争夺」。",ex:"The dispute became a story about jockeying for credit."},
+  vanguard:{t:"v",w:"vanguard",ipa:"/ˈvænɡɑːd/",pos:"n. 名词",cn:"先锋、最前沿的群体。常搭配 the vanguard of。",ex:"These labs sit in the vanguard of AI research."},
+  vocation:{t:"v",w:"vocation",ipa:"/vəʊˈkeɪʃn/",pos:"n. 名词",cn:"天职、志业——一种「被召唤去做」的事业。比 profession 多一层使命感。",ex:"They treat mathematics as a vocation, not just a job."},
+  loophole:{t:"v",w:"loophole",ipa:"/ˈluːphəʊl/",pos:"n. 名词",cn:"漏洞、空子。指形式合规但违背原意地达成目标。",ex:"Critics say the proof only works through a loophole."},
+  emphatic:{t:"v",w:"emphatic",ipa:"/ɪmˈfætɪk/",pos:"adj. 形容词",cn:"语气强烈的、斩钉截铁的。",ex:"He was emphatic that the key ideas came from his colleagues."},
+  fixate:{t:"v",w:"fixate on",ipa:"/ˈfɪkseɪt ɒn/",pos:"phr. 动词短语",cn:"执着于、死死盯住。含「过度专注、难以移开」的意味。",ex:"The industry has fixated on math as its benchmark."},
+  superhuman:{t:"v",w:"superhuman intelligence",ipa:"/ˌsuːpəˈhjuːmən/",pos:"n. 名词短语",cn:"超人类智能，即在所有相关方面全面超越人类的智能。",ex:"Their stated goal is superhuman intelligence."},
+  magnitude:{t:"v",w:"sheer magnitude",ipa:"/ʃɪə ˈmæɡnɪtjuːd/",pos:"n. 名词短语",cn:"纯粹的规模／量级。sheer 用来强调「光是这一点就足够震撼」。",ex:"No one anticipated the sheer magnitude of what models can now do."},
+  petty:{t:"v",w:"petty posturing",ipa:"/ˈpeti ˈpɒstʃərɪŋ/",pos:"n. 名词短语",cn:"小肚鸡肠的作态、故作姿态。petty = 琐碎/小心眼；posturing = 做姿态。",ex:"He asked the labs to set petty posturing aside."},
+
+  mdr:{t:"t",w:"million-dollar problems",ipa:"/ˈmɪljən ˈdɒlə/",pos:"n. 专有概念",cn:"「百万美元问题」。指克莱数学研究所 2000 年设立的七个千禧年大奖难题（Millennium Prize Problems），每解一题奖金 100 万美元。本文中的是纳维–斯托克斯问题。",ex:"Six of the seven million-dollar problems remain open."},
+  deepblue:{t:"t",w:"Deep Blue–Kasparov moment",ipa:"/diːp bluː ˈkæspərɒv/",pos:"n. 典故",cn:"指 1997 年 IBM「深蓝」战胜国际象棋世界冠军卡斯帕罗夫——象征机器在人类智力象征性领域实现反超的历史节点。",ex:"People called it a Deep Blue moment for mathematics."},
+  ns:{t:"t",w:"Navier-Stokes equations",ipa:"/næˈvjeɪ stəʊks/",pos:"n. 专业术语",cn:"纳维–斯托克斯方程，描述黏性流体运动的核心偏微分方程，是 CFD／CAE 仿真的理论基础。其「解是否永远光滑且存在」是千禧年难题之一。",ex:"Navier-Stokes equations underpin nearly all CFD simulation."},
+  clay:{t:"t",w:"Clay Mathematics Institute",ipa:"/kleɪ/",pos:"n. 专有名词",cn:"克莱数学研究所，美国私立基金会（1998 年成立），以设立千禧年大奖难题闻名。",ex:"The Clay Mathematics Institute posted the prize in 2000."},
+  euler:{t:"t",w:"Euler equations",ipa:"/ˈɔɪlə/",pos:"n. 专业术语",cn:"欧拉方程，纳维–斯托克斯方程在忽略黏性（无摩擦）后的简化形式，描述理想流体。本文中它被率先证明可以「blow up」。",ex:"Euler equations are the frictionless limit of Navier-Stokes."},
+  lean:{t:"t",w:"Lean",ipa:"/liːn/",pos:"n. 专有名词",cn:"Lean，一种交互式定理证明器（proof assistant）。数学家用它把证明写成机器可逐步校验的形式，是当前「形式化验证」的关键工具。",ex:"They verified the proof in Lean before publishing."},
+  fields:{t:"t",w:"Fields Medal",ipa:"/fiːldz ˈmedl/",pos:"n. 专有名词",cn:"菲尔兹奖，数学界最高荣誉，每四年颁发一次，授予不超过四位 40 岁以下的数学家。",ex:"He argued his collaborator deserves a Fields Medal."},
+  frontier:{t:"t",w:"frontier models",ipa:"/ˈfrʌntɪə ˈmɒdlz/",pos:"n. 行业术语",cn:"「前沿模型」，指当前能力最强、处于技术边界的顶级大模型（如 GPT、Claude 的旗舰版本）。",ex:"Frontier models can now do math no human can."}
+};
+
+/* ============ 状态 ============ */
+var done = {};
+var curWord = null;
+
+/* ============ 滚动进度 ============ */
+var bar = document.getElementById('bar');
+window.addEventListener('scroll', function(){
+  var h = document.documentElement.scrollHeight - window.innerHeight;
+  var p = h > 0 ? (window.scrollY / h) * 100 : 0;
+  bar.style.width = Math.min(100, Math.max(0, p)) + '%';
+}, {passive:true});
+
+/* ============ 字号 ============ */
+var scale = 1;
+function applyScale(){
+  document.documentElement.style.setProperty('--fscale', scale);
+  curWord = curWord; // no-op
+}
+document.getElementById('fup').onclick = function(){ scale = Math.min(1.4, scale + 0.08); applyScale(); toast('正文字号 ' + Math.round(scale*100) + '%'); };
+document.getElementById('fdown').onclick = function(){ scale = Math.max(0.82, scale - 0.08); applyScale(); toast('正文字号 ' + Math.round(scale*100) + '%'); };
+
+/* ============ 提示条 ============ */
+var toastEl = document.getElementById('toast'), tTimer = null;
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('on');
+  clearTimeout(tTimer);
+  tTimer = setTimeout(function(){ toastEl.classList.remove('on'); }, 1500);
+}
+
+/* ============ 弹层 ============ */
+var mask = document.getElementById('mask'), sheet = document.getElementById('sheet');
+function openSheet(key){
+  var d = W[key];
+  if(!d) return;
+  curWord = key;
+  document.getElementById('shw').textContent = d.w;
+  document.getElementById('shipa').textContent = d.ipa;
+  var bd = document.getElementById('shbadge');
+  bd.textContent = d.t === 't' ? '专业术语' : '通用生词';
+  bd.className = 'sh-badge ' + d.t;
+  document.getElementById('shpos').textContent = d.pos;
+  document.getElementById('shcn').textContent = d.cn;
+  document.getElementById('shex').innerHTML = '<span class="lbl">EXAMPLE</span>' + d.ex;
+  var mb = document.getElementById('shmark');
+  mb.textContent = done[key] ? '取消标记' : '标记已掌握';
+  mb.className = 'btn ' + (done[key] ? 'ok' : 'primary');
+  mask.classList.add('on');
+  sheet.classList.add('on');
+}
+function closeSheet(){ mask.classList.remove('on'); sheet.classList.remove('on'); curWord = null; }
+mask.onclick = closeSheet;
+document.getElementById('shclose').onclick = closeSheet;
+
+document.getElementById('shmark').onclick = function(){
+  if(!curWord) return;
+  if(done[curWord]){ delete done[curWord]; toast('已取消标记'); }
+  else { done[curWord] = 1; toast('已标记为掌握 ✓'); }
+  paintDone();
+  renderList(curTab);
+  closeSheet();
+};
+
+/* 正文点击 */
+document.querySelectorAll('.m').forEach(function(el){
+  el.addEventListener('click', function(){
+    var k = el.getAttribute('data-w');
+    if(done[k]) { toast('已标记掌握，长按可取消'); }
+    openSheet(k);
+  });
+  el.addEventListener('contextmenu', function(e){
+    e.preventDefault();
+    var k = el.getAttribute('data-w');
+    if(k) openSheet(k);
+  });
+});
+
+function paintDone(){
+  document.querySelectorAll('.m').forEach(function(el){
+    var k = el.getAttribute('data-w');
+    if(done[k]) el.classList.add('done'); else el.classList.remove('done');
+  });
+}
+
+/* ============ 词汇表 ============ */
+var curTab = 'v';
+function renderList(tab){
+  curTab = tab;
+  var host = document.getElementById('glist');
+  var keys = Object.keys(W).filter(function(k){ return W[k].t === tab; });
+  var html = '';
+  keys.forEach(function(k){
+    var d = W[k];
+    var isDone = !!done[k];
+    html += '<div class="gitem" data-k="' + k + '">'
+      + '<span class="dot ' + d.t + '"></span>'
+      + '<div style="flex:1;min-width:0;">'
+      +   '<div class="gw" style="' + (isDone ? 'text-decoration:line-through;opacity:.45;' : '') + '">' + d.w + '</div>'
+      +   '<div class="gcn">' + d.pos + ' · ' + d.cn.split('。')[0] + '。</div>'
+      + '</div>'
+      + '<span class="go">›</span>'
+      + '</div>';
+  });
+  host.innerHTML = html;
+  host.querySelectorAll('.gitem').forEach(function(el){
+    el.onclick = function(){ openSheet(el.getAttribute('data-k')); };
+  });
+}
+document.querySelectorAll('.tab').forEach(function(b){
+  b.onclick = function(){
+    document.querySelectorAll('.tab').forEach(function(x){ x.classList.remove('on'); });
+    b.classList.add('on');
+    renderList(b.getAttribute('data-tab'));
+  };
+});
+
+/* 计数 */
+var vc = 0, tc = 0;
+Object.keys(W).forEach(function(k){ W[k].t === 't' ? tc++ : vc++; });
+document.getElementById('vcount').textContent = vc;
+document.getElementById('tcount').textContent = tc;
+document.getElementById('tv').textContent = '(' + vc + ')';
+document.getElementById('tt').textContent = '(' + tc + ')';
+renderList('v');
+</script>
+</body>
+</html>

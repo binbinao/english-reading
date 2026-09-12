@@ -1,0 +1,20 @@
+{
+  "articles": [
+    {
+      "date": "2026-09-12",
+      "episode": "第 001 期",
+      "source": "Scientific American",
+      "category": "AI · 数学",
+      "title": "AI may have just solved a million-dollar math problem. The field will never be the same",
+      "subtitle": "A mathematician compared the feat to the history-making chess competition in which IBM's Deep Blue computer beat Garry Kasparov in 1997",
+      "sourceFull": "Scientific American · Joseph Howlett · 2026-09-08",
+      "sourceUrl": "https://www.scientificamerican.com/article/ai-may-have-just-solved-a-million-dollar-math-problem-the-field-will-never-be-the-same/",
+      "words": 1136,
+      "level": "CEFR B2–C1",
+      "vocabCount": 29,
+      "termCount": 8,
+      "url": "articles/2026-09-12.html",
+      "txt": "articles/2026-09-12.txt"
+    }
+  ]
+}
