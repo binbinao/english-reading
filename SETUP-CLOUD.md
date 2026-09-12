@@ -28,7 +28,7 @@ WorkBuddy 微信小程序的**「云端工作」模式**把任务跑在腾讯云
 3. **Expiration**：90 天（到期重建，别选 No expiration）
 4. **Repository access** → Only select repositories → 只勾 `binbinao/english-reading`
 5. **Permissions** → Repository permissions → **Contents: Read and write**（其余全部留 No access）
-6. 生成，复制 `github_pat_...`
+6. 生成，复制出来的是一串以 `github_pat_` 开头的长字符串
 
 ⚠️ 安全约束（务必遵守）：
 - 这个 token 只对**这一个仓库**有读写权，泄了也伤不到别的项目
