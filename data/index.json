@@ -2,6 +2,23 @@
   "articles": [
     {
       "date": "2026-09-12",
+      "episode": "第 002 期",
+      "source": "Scientific American",
+      "category": "公共卫生 · 纪念",
+      "title": "25 years after 9/11, survivors are still getting sick—here are the numbers",
+      "subtitle": "A quarter of a century after the Twin Towers fell, those who lived through the attacks are still seeking care for myriad illnesses, including cancers, post-traumatic stress disorder, and more",
+      "sourceFull": "Scientific American · Jackie Flynn Mogensen · 2026-09-11",
+      "sourceUrl": "https://www.scientificamerican.com/article/25-years-after-9-11-survivors-are-still-getting-sick-here-are-the-numbers/",
+      "words": 1112,
+      "level": "CEFR B2–C1",
+      "vocabCount": 27,
+      "termCount": 12,
+      "url": "articles/2026-09-12-002.html",
+      "txt": "articles/2026-09-12-002.txt",
+      "pubDate": "2026-09-11"
+    },
+    {
+      "date": "2026-09-12",
       "episode": "第 001 期",
       "source": "Scientific American",
       "category": "AI · 数学",
@@ -14,7 +31,8 @@
       "vocabCount": 29,
       "termCount": 8,
       "url": "articles/2026-09-12.html",
-      "txt": "articles/2026-09-12.txt"
+      "txt": "articles/2026-09-12.txt",
+      "pubDate": "2026-09-08"
     }
   ]
 }

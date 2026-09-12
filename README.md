@@ -36,9 +36,10 @@ english-reading/
 ## 每期索引
 
 <!-- INDEX:START -->
-| 日期 | 来源 | 标题 | 词数 | 生词 | 术语 | 链接 |
-|---|---|---|---:|---:|---:|---|
-| 2026-09-12 | Scientific American | [AI may have just solved a million-dollar math problem. The field will never be the same](articles/2026-09-12.html) | 1136 | 29 | 8 | [HTML](articles/2026-09-12.html) · [TXT](articles/2026-09-12.txt) |
+| 期号 | 推送日 | 原文日 | 来源 | 标题 | 词数 | 生词 | 术语 | 链接 |
+|---|---|---|---|---|---:|---:|---:|---|
+| 第 002 期 | 2026-09-12 | 2026-09-11 | Scientific American | 25 years after 9/11, survivors are still getting sick—here are the numbers | 1112 | 27 | 12 | [HTML](articles/2026-09-12-002.html) · [TXT](articles/2026-09-12-002.txt) |
+| 第 001 期 | 2026-09-12 | 2026-09-08 | Scientific American | AI may have just solved a million-dollar math problem. The field will never be the same | 1136 | 29 | 8 | [HTML](articles/2026-09-12.html) · [TXT](articles/2026-09-12.txt) |
 <!-- INDEX:END -->
 
 ## 怎么新增一期

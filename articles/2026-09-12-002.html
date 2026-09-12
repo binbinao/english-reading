@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<title>每日英文精读 · 2026-09-12 · 第002期 · Scientific American</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  :root{
+    --ink:#1C1C1E;
+    --ink2:#3A3A3C;
+    --gray:#8E8E93;
+    --line:#E6E6EA;
+    --bg:#F2F2F4;
+    --card:#FFFFFF;
+    --gold:#C97B0A;
+    --gold-bg:#FDF4E3;
+    --gold-line:#E7C88A;
+    --blue:#2C5FD6;
+    --blue-bg:#EDF2FE;
+    --blue-line:#A9C0EE;
+    --green:#0E8A5F;
+    --radius:16px;
+    --fscale:1;
+  }
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:15px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== 手机外框（模拟小程序视口） ===== */
+  .shell{max-width:420px;margin:0 auto;background:var(--card);min-height:100vh;position:relative;overflow-x:hidden;
+    box-shadow:0 0 0 1px rgba(0,0,0,.04), 0 12px 40px rgba(0,0,0,.06);}
+
+  /* ===== 顶部固定栏 ===== */
+  .topbar{
+    position:sticky;top:0;z-index:60;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:saturate(180%) blur(14px);
+    -webkit-backdrop-filter:saturate(180%) blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .tb-row{display:flex;align-items:center;gap:10px;padding:9px 14px 8px;}
+  .tb-back{width:26px;height:26px;display:flex;align-items:center;justify-content:center;color:var(--ink2);font-size:17px;flex:0 0 auto;}
+  .tb-title{flex:1;min-width:0;font-size:13.5px;font-weight:600;color:var(--ink2);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .tb-act{display:flex;align-items:center;gap:8px;flex:0 0 auto;}
+  .fbtn{border:1px solid var(--line);background:#fff;border-radius:8px;height:26px;min-width:30px;
+    font-size:12px;color:var(--ink2);font-weight:600;padding:0 7px;cursor:pointer;font-family:inherit;}
+  .fbtn:active{background:#F0F0F2;}
+  .progress{height:2px;background:transparent;}
+  .progress i{display:block;height:2px;width:0;background:linear-gradient(90deg,#F59E0B,#C97B0A);
+    border-radius:0 2px 2px 0;transition:width .1s linear;}
+
+  /* ===== 封面区 ===== */
+  .hero{padding:20px 18px 14px;border-bottom:1px solid var(--line);
+    background:linear-gradient(168deg,#FFFDF8 0%,#FFFFFF 46%,#FCFCFD 100%);}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+  .chip{font-size:11px;line-height:1;padding:5px 9px;border-radius:999px;font-weight:600;letter-spacing:.2px;}
+  .chip.src{background:var(--ink);color:#fff;}
+  .chip.date{background:#F0F0F2;color:var(--ink2);}
+  .chip.lvl{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-line);}
+  .chip.cat{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-line);}
+
+  h1{font-size:21px;line-height:1.34;margin:0 0 8px;font-weight:800;letter-spacing:-.2px;color:var(--ink);}
+  .sub{font-size:13.5px;line-height:1.6;color:var(--gray);margin:0 0 14px;font-weight:400;}
+  .byline{font-size:12px;color:var(--gray);line-height:1.7;}
+  .byline b{color:var(--ink2);font-weight:600;}
+  .stats{display:flex;gap:0;margin:14px -18px 0;border-top:1px solid var(--line);}
+  .stat{flex:1;text-align:center;padding:11px 4px 2px;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat b{display:block;font-size:16px;font-weight:800;color:var(--ink);letter-spacing:-.3px;}
+  .stat span{display:block;font-size:10.5px;color:var(--gray);margin-top:2px;letter-spacing:.2px;}
+
+  /* ===== 阅读提示 ===== */
+  .hint{margin:14px 14px 0;padding:11px 13px;border-radius:12px;background:#FAFAFB;border:1px solid var(--line);
+    font-size:12.5px;line-height:1.75;color:var(--ink2);}
+  .hint b{color:var(--ink);}
+  .k-vocab{display:inline-block;padding:0 4px;border-radius:4px;background:var(--blue-bg);color:var(--blue);
+    border-bottom:1px dashed var(--blue-line);font-weight:600;}
+  .k-term{display:inline-block;padding:0 4px;border-radius:4px;background:var(--gold-bg);color:var(--gold);
+    border-bottom:1px solid var(--gold-line);font-weight:600;}
+
+  /* ===== 正文 ===== */
+  article{padding:20px 18px 8px;font-family:Georgia,"Iowan Old Style","Times New Roman",serif;
+    font-size:calc(17px * var(--fscale));line-height:1.92;color:var(--ink);letter-spacing:-.1px;}
+  article p{margin:0 0 1.15em;text-align:justify;}
+  article p:first-of-type::first-letter{
+    float:left;font-size:2.9em;line-height:.86;padding:2px 8px 0 0;font-weight:700;color:var(--gold);
+    font-family:Georgia,serif;}
+  .divider{display:flex;justify-content:center;gap:6px;margin:22px 0;color:#C7C7CC;font-size:11px;letter-spacing:4px;}
+
+  /* 高亮词 */
+  .m{cursor:pointer;border-radius:3px;padding:0 1px;transition:background .15s;}
+  .m.v{background:var(--blue-bg);border-bottom:1px dashed var(--blue-line);color:var(--blue);font-weight:500;}
+  .m.t{background:var(--gold-bg);border-bottom:1px solid var(--gold-line);color:var(--gold);font-weight:500;}
+  .m:active{filter:brightness(.94);}
+  .m.done{opacity:.42;text-decoration:line-through;text-decoration-thickness:1px;}
+
+  /* ===== 词汇表 ===== */
+  .gloss{background:#FAFAFB;border-top:1px solid var(--line);padding:20px 18px 26px;}
+  .gloss h2{font-size:15px;margin:0 0 4px;font-weight:800;letter-spacing:-.2px;}
+  .gloss .gsub{font-size:11.5px;color:var(--gray);margin:0 0 13px;}
+  .tabs{display:flex;gap:7px;margin-bottom:13px;}
+  .tab{font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;background:#fff;
+    border:1px solid var(--line);color:var(--gray);cursor:pointer;font-family:inherit;}
+  .tab.on{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .gitem{display:flex;gap:10px;padding:10px 12px;background:#fff;border:1px solid var(--line);
+    border-radius:11px;margin-bottom:7px;cursor:pointer;align-items:flex-start;}
+  .gitem:active{background:#F7F7F9;}
+  .gitem .gw{font-size:13.5px;font-weight:700;color:var(--ink);font-family:Georgia,serif;}
+  .gitem .gcn{font-size:11.5px;color:var(--gray);margin-top:2px;line-height:1.5;}
+  .gitem .go{margin-left:auto;font-size:15px;color:#C7C7CC;flex:0 0 auto;line-height:1.2;}
+  .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px;vertical-align:1px;}
+  .dot.v{background:var(--blue);} .dot.t{background:var(--gold);}
+
+  /* ===== 页脚 ===== */
+  footer{padding:18px 18px 34px;border-top:1px solid var(--line);font-size:11.5px;color:var(--gray);line-height:1.8;}
+  footer a{color:var(--blue);text-decoration:none;word-break:break-all;}
+  .ftmeta{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);}
+  .nextbox{margin-top:14px;padding:12px 13px;border-radius:12px;background:linear-gradient(135deg,#1C1C1E,#3A3A3C);
+    color:#fff;font-size:12px;line-height:1.7;}
+  .nextbox b{color:#F5B946;}
+
+  /* ===== 底部弹层 ===== */
+  .mask{position:fixed;inset:0;background:rgba(0,0,0,.38);opacity:0;pointer-events:none;
+    transition:opacity .22s;z-index:80;}
+  .mask.on{opacity:1;pointer-events:auto;}
+  .sheet{position:fixed;left:50%;bottom:0;transform:translate(-50%,102%);width:100%;max-width:420px;
+    background:#fff;border-radius:20px 20px 0 0;z-index:90;transition:transform .28s cubic-bezier(.22,.9,.28,1);
+    box-shadow:0 -8px 34px rgba(0,0,0,.16);padding:8px 18px calc(22px + env(safe-area-inset-bottom));}
+  .sheet.on{transform:translate(-50%,0);}
+  .drag{width:38px;height:4px;border-radius:2px;background:#D8D8DC;margin:4px auto 14px;}
+  .sh-top{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;}
+  .sh-word{font-size:24px;font-weight:800;font-family:Georgia,serif;letter-spacing:-.4px;}
+  .sh-ipa{font-size:13px;color:var(--gray);font-family:Georgia,serif;}
+  .sh-badge{font-size:10.5px;font-weight:700;padding:4px 8px;border-radius:6px;line-height:1;}
+  .sh-badge.v{background:var(--blue-bg);color:var(--blue);}
+  .sh-badge.t{background:var(--gold-bg);color:var(--gold);}
+  .sh-body{margin-top:12px;}
+  .sh-pos{font-size:11.5px;color:var(--gold);font-weight:700;letter-spacing:.3px;margin-bottom:5px;}
+  .sh-cn{font-size:15.5px;line-height:1.75;color:var(--ink);font-weight:500;}
+  .sh-ex{margin-top:12px;padding:11px 12px;background:#FAFAFB;border-left:3px solid var(--line);
+    border-radius:0 9px 9px 0;font-family:Georgia,serif;font-size:13.5px;line-height:1.75;color:var(--ink2);}
+  .sh-ex .lbl{font-family:-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;
+    color:var(--gray);display:block;margin-bottom:4px;}
+  .sh-btns{display:flex;gap:9px;margin-top:16px;}
+  .btn{flex:1;height:42px;border-radius:11px;border:1px solid var(--line);background:#fff;color:var(--ink2);
+    font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;}
+  .btn.primary{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .btn:active{opacity:.82;}
+  .btn.ok{background:var(--green);border-color:var(--green);color:#fff;}
+
+  .toast{position:fixed;left:50%;bottom:88px;transform:translate(-50%,14px);background:rgba(28,28,30,.94);
+    color:#fff;font-size:12.5px;padding:9px 15px;border-radius:999px;opacity:0;pointer-events:none;
+    transition:all .24s;z-index:100;white-space:nowrap;}
+  .toast.on{opacity:1;transform:translate(-50%,0);}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- 顶部栏 -->
+  <div class="topbar">
+    <div class="tb-row">
+      <div class="tb-back">‹</div>
+      <div class="tb-title">每日英文精读 · 第 002 期</div>
+      <div class="tb-act">
+        <button class="fbtn" id="fdown">A−</button>
+        <button class="fbtn" id="fup">A+</button>
+      </div>
+    </div>
+    <div class="progress"><i id="bar"></i></div>
+  </div>
+
+  <!-- 封面 -->
+  <header class="hero">
+    <div class="chips">
+      <span class="chip src">Scientific American</span>
+      <span class="chip cat">公共卫生 · 纪念</span>
+      <span class="chip date">2026-09-11</span>
+      <span class="chip lvl">CEFR B2–C1</span>
+    </div>
+    <h1>25 years after 9/11, survivors are still getting sick—here are the numbers</h1>
+    <p class="sub">A quarter of a century after the Twin Towers fell, those who lived through the attacks are still seeking care for myriad illnesses, including cancers, post-traumatic stress disorder, and more</p>
+    <div class="byline"><b>By Jackie Flynn Mogensen</b> · edited by Claire Cameron<br>《科学美国人》 · 公共卫生 / 长篇报道</div>
+    <div class="stats">
+      <div class="stat"><b>1,112</b><span>词数 WORDS</span></div>
+      <div class="stat"><b>≈7</b><span>分钟 MIN</span></div>
+      <div class="stat"><b id="vcount">27</b><span>生词 VOCAB</span></div>
+      <div class="stat"><b id="tcount">12</b><span>术语 TERMS</span></div>
+    </div>
+  </header>
+
+  <!-- 阅读提示 -->
+  <div class="hint">
+    <b>怎么用：</b>文中<span class="k-vocab">蓝色虚线</span>是通用生词，<span class="k-term">金色实线</span>是专业术语/专有名词。
+    <b>点一下</b>任意高亮词，弹出释义卡（音标 · 词性 · 中文 · 例句），可标记「已掌握」。右上角可调字号。
+  </div>
+
+  <!-- 正文 -->
+  <article id="art">
+    <p>Twenty-five years on, Matthew McCauley still remembers the dust. On September 11, 2001, he was working as a law clerk just blocks away from the World Trade Center in lower Manhattan when terrorists flew a pair of planes into its Twin Towers, causing them to collapse in a cloud of <span class="m v" data-w="debris">debris</span>, ash and fire.</p>
+
+    <p>The dust <span class="m v" data-w="plume">plume</span>&mdash;which contained concrete, <span class="m t" data-w="asbestos">asbestos</span>, glass, and more&mdash;reached more than a kilometer above New York City&rsquo;s financial district. McCauley, a former police officer in his early 30s, stepped up to help <span class="m v" data-w="sift">sift through</span> the <span class="m v" data-w="rubble">rubble</span> at the site, which we now know as <span class="m t" data-w="groundzero">Ground Zero</span>. At least two feet&rsquo;s (more than half a meter&rsquo;s) worth of dirt and dust covered the ground, he recalls. <span class="m v" data-w="sediment">Sediment</span> hung in the air. Fires burned at the site for more than a month.</p>
+
+    <p>&ldquo;Lower Manhattan just smelled,&rdquo; he says.</p>
+
+    <p>Locals reported dust in their homes weeks after the attacks. In McCauley&rsquo;s office building, the dust kept reappearing on desks and inside <span class="m v" data-w="windowsill">windowsills</span>. &ldquo;Every single day there was dust to be cleaned,&rdquo; he says, &ldquo;every day.&rdquo;</p>
+
+    <p>Now, a quarter-century later, McCauley is <span class="m v" data-w="plague">plagued</span> by a persistent cough and <span class="m v" data-w="sinus">sinus</span> issues. &ldquo;I wake up every morning, and you&rsquo;d think that I smoked. I don&rsquo;t smoke,&rdquo; he says. &ldquo;It&rsquo;s the gift that keeps giving from Ground Zero.&rdquo;</p>
+
+    <p>Still, McCauley says he is one of the lucky ones: He&rsquo;s lost several close friends to 9/11-related illnesses. And McCauley, now working as a lawyer for the <span class="m v" data-w="advocacy">advocacy</span> organization 9/11 Health Watch, says he&rsquo;s known hundreds who have died in the <span class="m v" data-w="aftermath">aftermath</span> of the attacks.</p>
+
+    <p>The true health impact of the attacks is impossible to measure, but an estimated 400,000 people were exposed to &ldquo;toxic <span class="m v" data-w="contaminant">contaminants</span>, risk of physical injury, and physically and emotionally stressful conditions&rdquo; in the days and weeks after 9/11, according to the U.S. Centers for Disease Control and Prevention.</p>
+
+    <p>Aside from respiratory issues, 9/11 survivors and first responders have developed health conditions such as cancers, <span class="m t" data-w="gerd">gastroesophageal reflux disease (GERD)</span>, <span class="m t" data-w="ptsd">post-traumatic stress disorder (PTSD)</span>, substance abuse, anxiety, depression, <span class="m t" data-w="apnea">sleep apnea</span>, and more. As of June 30, 2026, the <span class="m t" data-w="wtc">World Trade Center (WTC) Health Program</span>, a research effort that spans multiple clinics, health agencies and universities, has documented more than 139,000 health conditions&mdash;and counting&mdash;in more than 150,000 survivors and first responders.</p>
+
+    <p>Thanks to years of <span class="m v" data-w="lobbying">lobbying</span> by 9/11 health advocates, treatment for McCauley&rsquo;s cough, as well as for dozens of conditions associated with the attacks, is covered for survivors and first responders under the <span class="m t" data-w="zadroga">James Zadroga 9/11 Health and Compensation Act</span>, which was signed into law in 2011. But many survivors and their families <span class="m v" data-w="contend">contend</span> that is still not enough to account for the risks they have faced.</p>
+
+    <p>Back at Ground Zero all those years ago, McCauley recalls the dangers posed by burning rubble and dust crossing his mind. But, he says, &ldquo;the focus was to get things done.&rdquo;</p>
+
+    <p>Wearing a paper mask was <span class="m v" data-w="unwieldy">unwieldy</span>. &ldquo;It was hot. It was sweaty. You were just constantly moving,&rdquo; he recalls. Still, he feels that government agencies could have done more to protect first responders and civilians from the dangers posed by <span class="m v" data-w="hazardous">hazardous</span> dust.</p>
+
+    <p>&ldquo;The World Trade Center was basically made of every single <span class="m t" data-w="carcinogen">carcinogen</span> known to man, as most buildings are, and then [it] was <span class="m t" data-w="micronize">micronized</span> in seconds and became <span class="m v" data-w="airborne">airborne</span>,&rdquo; McCauley says.</p>
+
+    <p>Indeed, researchers are still documenting new health conditions&mdash;particularly cancers&mdash;among survivors and first responders. As of June 30, cancer made up about 71 percent of the conditions in these groups recorded by the WTC Health Program in the past 12 months. Most people who were present during the attacks and their aftermath and are living with cancer today have <span class="m t" data-w="nonmelanoma">nonmelanoma skin cancer</span>, followed by prostate cancer and breast cancer, according to the WTC Health Program. But many also have rarer forms of the disease, such as brain cancer, testicular cancer, <span class="m v" data-w="leukemia">leukemia</span>, and more.</p>
+
+    <p>&ldquo;We still see new patients, and a lot of our patients that are coming in now are coming in with a diagnosis of cancer or other <span class="m v" data-w="latent">latent</span> conditions like <span class="m t" data-w="ild">interstitial lung disease</span>,&rdquo; says Denise Harrison, clinical director of the New York University Grossman School of Medicine&rsquo;s WTC Health Program and an associate professor at the school. That&rsquo;s because many of these conditions take years to develop, she says.</p>
+
+    <p>Alongside the rise in long-term illnesses, researchers have also seen an increase in &ldquo;<span class="m t" data-w="adjustment">adjustment disorders</span>&rdquo;&mdash;that is, anxiety, depression and other mental health issues related to other medical conditions, such as a cancer diagnosis, says Peter Haugen, director of mental health for the NYU Grossman School of Medicine&rsquo;s WTC Health Program.</p>
+
+    <p>&ldquo;You can imagine, people who come in with cancer that&rsquo;s progressed or newly diagnosed, it, of course, would make sense that they might be experiencing some of those symptoms,&rdquo; he says. And treatments such as chemotherapy can also <span class="m v" data-w="toll">take a mental toll</span>, he adds.</p>
+
+    <p>Directly linking an environmental exposure to a complex medical condition such as cancer can be <span class="m v" data-w="fraught">fraught</span>. It&rsquo;s hard to know who was exposed to which pollutants, where and for how long. Survivors and responders haven&rsquo;t lived <span class="m v" data-w="vacuum">in a vacuum</span> for the past 25 years, Harrison says. They&rsquo;ve experienced wildfire pollution, COVID, daily allergies, and more&mdash;this &ldquo;complicates the picture,&rdquo; she says. But under the WTC Health Program, covered illnesses only must be associated with 9/11 exposures; <span class="m v" data-w="causal">causal</span> proof isn&rsquo;t necessary.</p>
+
+    <p>As time goes on, cases are likely to keep climbing.</p>
+
+    <p>Just this week, in response to a lawsuit from 9/11 Health Watch, the New York City mayor&rsquo;s office agreed to release a <span class="m v" data-w="trove">trove</span> of documents suggesting the city may have <span class="m v" data-w="downplay">downplayed</span> air quality issues in Manhattan in the months after the attacks. That means health issues may be more widespread than previously documented. McCauley hopes the documents could support new research into illnesses that are not currently covered by the WTC Health Program, as well as the effect of 9/11 exposure on pregnancy and <span class="m v" data-w="fetus">fetuses</span>.</p>
+
+    <p>McCauley, now age 56, doesn&rsquo;t plan to &ldquo;live in fear&rdquo; of getting sick. But witnessing the death of many close friends over the years has tested his <span class="m v" data-w="resolve">resolve</span>.</p>
+
+    <div class="divider">&#9679; &#9679; &#9679;</div>
+
+    <p>One of his closest friends, Brian Payne, was a volunteer firefighter at Ground Zero. He was a &ldquo;<span class="m v" data-w="btl">bigger than life</span>&rdquo; guy who loved the New York Rangers and the Mets, McCauley recalls. &ldquo;One day, Brian was healthy and playing hockey and being a fireman and going fishing, and next thing you know, he had cancer.&rdquo;</p>
+
+    <p>Payne died in 2022, leaving a wife and four kids.</p>
+
+    <p>More than anything else, McCauley worries about how the deaths in his community have affected his own three college-age kids. They have seen some of their friends&rsquo; parents lost to 9/11-related illnesses, too. &ldquo;My kids kind of look at me, and they&rsquo;re like, &lsquo;Well, what about you, Dad?&rsquo;&rdquo; he says.</p>
+
+    <p>&ldquo;We&rsquo;re surrounded by it,&rdquo; McCauley adds.</p>
+  </article>
+
+  <!-- 词汇表 -->
+  <section class="gloss">
+    <h2>本期词汇表</h2>
+    <p class="gsub">点任意条目查看完整释义卡 · 标记已掌握后可隐藏复习</p>
+    <div class="tabs">
+      <button class="tab on" data-tab="v">通用生词 <span id="tv"></span></button>
+      <button class="tab" data-tab="t">专业术语 <span id="tt"></span></button>
+    </div>
+    <div id="glist"></div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer>
+    <b style="color:#1C1C1E;">原文来源</b><br>
+    Scientific American · Jackie Flynn Mogensen · 2026-09-11<br>
+    <a href="https://www.scientificamerican.com/article/25-years-after-9-11-survivors-are-still-getting-sick-here-are-the-numbers/">scientificamerican.com/article/25-years-after-9-11-survivors-are-still-getting-sick...</a>
+    <div class="ftmeta">
+      本文为每日英语阅读推荐，仅作语言学习用途，版权归原作者与出版方所有。生词释义由编辑整理，例句均为改写示例句（原文引用未改动）。<br>
+      本期选文共 <b>1,112</b> 词，符合 1000–2000 词精读区间。
+    </div>
+    <div class="nextbox">
+      <b>下一期预告</b><br>
+      候选池：科学美国人《AI insiders fear extinction. Security experts see a familiar fight》（2026-09-11，910 词，AI 安全治理）·《The data center backlash comes for SpaceXAI&rsquo;s Colossus》（2026-09-09，约 2,300 词长文，超区间）· 科学美国人《If AI can do math, what&rsquo;s the point of mathematicians?》（3,423 词）。
+    </div>
+  </footer>
+</div>
+
+<!-- 底部弹层 -->
+<div class="mask" id="mask"></div>
+<div class="sheet" id="sheet">
+  <div class="drag"></div>
+  <div class="sh-top">
+    <span class="sh-word" id="shw">word</span>
+    <span class="sh-ipa" id="shipa"></span>
+    <span class="sh-badge v" id="shbadge">生词</span>
+  </div>
+  <div class="sh-body">
+    <div class="sh-pos" id="shpos"></div>
+    <div class="sh-cn" id="shcn"></div>
+    <div class="sh-ex" id="shex"></div>
+  </div>
+  <div class="sh-btns">
+    <button class="btn primary" id="shmark">标记已掌握</button>
+    <button class="btn" id="shclose">关闭</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ 词条数据 ============ */
+var W = {
+  debris:{t:"v",w:"debris",ipa:"/ˈdebriː/",pos:"n. 名词（不可数）",cn:"碎片、瓦砾，尤指建筑物倒塌或爆炸后的残骸。无复数形式。",ex:"Rescue teams searched the debris for survivors."},
+  plume:{t:"v",w:"plume",ipa:"/pluːm/",pos:"n. 名词",cn:"羽状物；（烟、尘、水汽形成的）柱状团块。dust plume 即「扬尘团」；本义也指羽毛。",ex:"Satellite images showed a plume of smoke drifting east."},
+  sift:{t:"v",w:"sift through",ipa:"/sɪft θruː/",pos:"phr. 短语动词",cn:"翻找、逐项筛查——在一大堆东西里仔细挑拣。本句指在废墟中翻找搜救。",ex:"Investigators sifted through thousands of pages of records."},
+  rubble:{t:"v",w:"rubble",ipa:"/ˈrʌbl/",pos:"n. 名词（不可数）",cn:"碎石、瓦砾堆（砖石建筑倒塌后的碎块）。",ex:"The building was reduced to rubble in seconds."},
+  sediment:{t:"v",w:"sediment",ipa:"/ˈsedɪmənt/",pos:"n. 名词",cn:"沉积物、沉渣——悬浮物沉降后形成的物质。地质学与环保领域高频词。",ex:"Sediment settled slowly at the bottom of the tank."},
+  windowsill:{t:"v",w:"windowsill",ipa:"/ˈwɪndəʊsɪl/",pos:"n. 名词",cn:"窗台。由 window + sill（窗台条石/木）构成。",ex:"Dust kept collecting on the windowsill."},
+  plague:{t:"v",w:"plagued",ipa:"/pleɪɡd/",pos:"v. 动词（过去分词）",cn:"反复困扰、折磨，常用被动 be plagued by。名词含义是「瘟疫」，故带有「挥之不去」的意味。",ex:"The project has been plagued by delays from the start."},
+  sinus:{t:"v",w:"sinus",ipa:"/ˈsaɪnəs/",pos:"n. 名词",cn:"鼻窦——鼻腔周围颅骨内的含气空腔。sinus issues 指鼻窦炎一类问题。",ex:"Congestion and sinus pain are common in winter."},
+  advocacy:{t:"v",w:"advocacy",ipa:"/ˈædvəkəsi/",pos:"n. 名词",cn:"倡导、呼吁、维权活动。动词是 advocate（提倡），名词 advocate 指「倡导者/律师」。",ex:"Her advocacy helped win funding for the program."},
+  aftermath:{t:"v",w:"aftermath",ipa:"/ˈɑːftəmæθ/",pos:"n. 名词",cn:"（灾难、战争等大事之后的）余波、后果。固定搭配 in the aftermath of。",ex:"The region struggled for years in the aftermath of the quake."},
+  contaminant:{t:"v",w:"contaminants",ipa:"/kənˈtæmɪnənts/",pos:"n. 名词（常用复数）",cn:"污染物、污染物质——使某物变得不纯净的东西。动词 contaminate（污染）。",ex:"Tests found contaminants in the drinking water."},
+  lobbying:{t:"v",w:"lobbying",ipa:"/ˈlɒbiɪŋ/",pos:"n./v. 名词/动词",cn:"游说——向议员或官员持续施压以影响立法与拨款。lobby 原指议会大厅，说客在厅外等候议员而得名。",ex:"Years of lobbying led to the new law."},
+  contend:{t:"v",w:"contend",ipa:"/kənˈtend/",pos:"v. 动词",cn:"主张、声称（暗含他人未必同意）；另一义为「竞争、争夺」。",ex:"Critics contend that the rules are far too weak."},
+  unwieldy:{t:"v",w:"unwieldy",ipa:"/ʌnˈwiːldi/",pos:"adj. 形容词",cn:"笨重的、难以操作的；也形容庞大复杂、不易管理的组织或流程。",ex:"The paper mask was unwieldy in the heat."},
+  hazardous:{t:"v",w:"hazardous",ipa:"/ˈhæzədəs/",pos:"adj. 形容词",cn:"危险的、有危害的，尤指对健康或安全构成风险。名词 hazard（隐患）。",ex:"Workers were exposed to hazardous dust for weeks."},
+  airborne:{t:"v",w:"airborne",ipa:"/ˈeəbɔːn/",pos:"adj. 形容词",cn:"空气传播的、悬浮在空中的。air + borne（承载），与 waterborne（水传播的）同构。",ex:"Fine particles can stay airborne for hours."},
+  leukemia:{t:"v",w:"leukemia",ipa:"/luːˈkiːmiə/",pos:"n. 名词",cn:"白血病——造血系统的恶性肿瘤，俗称「血癌」。英式拼写为 leukaemia。",ex:"He was diagnosed with leukemia at the age of 40."},
+  latent:{t:"v",w:"latent",ipa:"/ˈleɪtnt/",pos:"adj. 形容词",cn:"潜伏的、潜在的——已经存在但尚未显现出来。latent conditions 指潜伏期很长的疾病。",ex:"The disease can stay latent for decades."},
+  toll:{t:"v",w:"take a mental toll",ipa:"/teɪk ə ˈmentl təʊl/",pos:"phr. 习语",cn:"造成（心理上的）慢性损耗与代价。toll 本义是「通行费」，引申为「付出的代价」；常搭配 take a heavy toll on。",ex:"Caring for a sick parent takes a mental toll."},
+  fraught:{t:"v",w:"fraught",ipa:"/frɔːt/",pos:"adj. 形容词",cn:"充满（风险、困难、焦虑）的、棘手的。常见搭配 fraught with danger / uncertainty。",ex:"Linking one pollutant to a single disease is fraught."},
+  vacuum:{t:"v",w:"in a vacuum",ipa:"/ɪn ə ˈvækjuːm/",pos:"phr. 习语",cn:"孤立地、脱离现实环境地。字面是「在真空中」；本句指这些人二十五年间并非与世隔绝，还暴露于其他污染。",ex:"No one lives in a vacuum — exposures add up over time."},
+  causal:{t:"v",w:"causal",ipa:"/ˈkɔːzl/",pos:"adj. 形容词",cn:"因果的、涉及因果关系的。causal proof 指「因果证明」，区别于仅有的统计关联（correlation）。",ex:"The study found a link, not causal proof."},
+  trove:{t:"v",w:"trove",ipa:"/trəʊv/",pos:"n. 名词",cn:"（有价值的）一批、一宗；宝库。源自 treasure trove（埋藏的宝物）。",ex:"The archive released a trove of internal documents."},
+  downplay:{t:"v",w:"downplayed",ipa:"/ˌdaʊnˈpleɪd/",pos:"v. 动词",cn:"淡化、轻描淡写——故意让某事显得不那么重要或严重。反义 play up。",ex:"Officials were accused of downplaying the health risks."},
+  fetus:{t:"v",w:"fetuses",ipa:"/ˈfiːtəs/",pos:"n. 名词（复数 fetuses）",cn:"胎儿，通常指妊娠八周之后的发育阶段。形容词 fetal。",ex:"Researchers studied the effect of the exposure on the fetus."},
+  resolve:{t:"v",w:"resolve",ipa:"/rɪˈzɒlv/",pos:"n. 名词（不可数）",cn:"决心、毅力、定力。作动词时意为「下定决心」或「解决（问题、争端）」。",ex:"The losses tested his resolve, but he kept going."},
+  btl:{t:"v",w:"bigger than life",ipa:"/ˈbɪɡə ðən laɪf/",pos:"idiom 习语",cn:"非同凡响的、气场远超常人的——形容一个人存在感极强、比真实生活更精彩。也常写作 larger than life。",ex:"He was a bigger than life character who filled any room."},
+
+  asbestos:{t:"t",w:"asbestos",ipa:"/æsˈbestəs/",pos:"n. 专业术语",cn:"石棉——一种天然纤维状硅酸盐矿物，曾广泛用于建筑防火与隔热材料。吸入其纤维可致肺癌与间皮瘤，现多数国家严格限用。",ex:"Asbestos in old buildings remains a serious health hazard."},
+  groundzero:{t:"t",w:"Ground Zero",ipa:"/ɡraʊnd ˈzɪərəʊ/",pos:"n. 专有名词",cn:"「归零地」。原指核爆的爆心投影点，现特指纽约世界贸易中心遗址（2001 年 9·11 事件现场），也泛指灾后废墟现场。",ex:"A memorial now stands at Ground Zero in lower Manhattan."},
+  gerd:{t:"t",w:"gastroesophageal reflux disease (GERD)",ipa:"/ˌɡæstrəʊɪˌsɒfəˈdʒiːəl ˈriːflʌks/",pos:"n. 专业术语",cn:"胃食管反流病——胃酸反流进入食管，引起烧心、反酸等症状。常见缩写 GERD，中文亦称「胃食道逆流」。",ex:"GERD is usually managed with diet changes and medication."},
+  ptsd:{t:"t",w:"post-traumatic stress disorder (PTSD)",ipa:"/ˌpəʊst trɔːˈmætɪk ˈstres dɪsɔːdə/",pos:"n. 专业术语",cn:"创伤后应激障碍——经历重大创伤事件后出现的反复闪回、回避、警觉性增高等症状。缩写 PTSD，中文简称「创伤后应激障碍」。",ex:"Many first responders were later diagnosed with PTSD."},
+  apnea:{t:"t",w:"sleep apnea",ipa:"/sliːp ˈæpniə/",pos:"n. 专业术语",cn:"睡眠呼吸暂停——睡眠中呼吸反复短暂停止，导致白天嗜睡并升高心血管风险。apnea 源自希腊语，意为「无呼吸」。",ex:"Untreated sleep apnea raises the risk of heart disease."},
+  wtc:{t:"t",w:"World Trade Center (WTC) Health Program",ipa:"/wɜːld treɪd ˈsentə/",pos:"n. 专有名词",cn:"世贸中心健康计划——美国联邦资助的长期监测与治疗项目，为 9·11 事件救援人员与幸存者提供免费医疗与追踪研究。",ex:"The WTC Health Program covers dozens of linked conditions."},
+  zadroga:{t:"t",w:"James Zadroga 9/11 Health and Compensation Act",ipa:"/dʒeɪmz zəˈdrəʊɡə/",pos:"n. 专有名词",cn:"《詹姆斯·扎德罗加 9·11 健康与赔偿法案》（2011 年签署）。为救援者与幸存者提供医疗资金与赔偿，以前纽约警局警探 James Zadroga 命名——他是首位因救援现场吸入毒尘致病殉职的警员。",ex:"The Zadroga Act funds lifelong care for 9/11 responders."},
+  carcinogen:{t:"t",w:"carcinogen",ipa:"/kɑːˈsɪnədʒən/",pos:"n. 专业术语",cn:"致癌物——能够诱发或促进癌症发生的物质。形容词 carcinogenic（致癌的）。",ex:"Asbestos is a well-known carcinogen."},
+  micronize:{t:"t",w:"micronized",ipa:"/ˈmaɪkrənaɪz/",pos:"v. 专业术语",cn:"微粉化——把固体材料粉碎成微米级颗粒。原文 micronized in seconds 指整栋大楼在顷刻间被粉碎成可被吸入肺部的细微颗粒。",ex:"The mineral was micronized into a fine, inhalable powder."},
+  nonmelanoma:{t:"t",w:"nonmelanoma skin cancer",ipa:"/ˌnɒnˌmeləˈnəʊmə/",pos:"n. 专业术语",cn:"非黑色素瘤皮肤癌——皮肤癌中除黑色素瘤以外的类型（如基底细胞癌、鳞状细胞癌），发病率高但预后相对较好。",ex:"Nonmelanoma skin cancer is the most common cancer worldwide."},
+  ild:{t:"t",w:"interstitial lung disease",ipa:"/ˌɪntəˈstɪʃl lʌŋ dɪˈziːz/",pos:"n. 专业术语",cn:"间质性肺病——累及肺间质（肺泡壁及其周围组织）的一组疾病，导致肺组织逐渐纤维化、进行性呼吸困难。",ex:"Interstitial lung disease can take years to become apparent."},
+  adjustment:{t:"t",w:"adjustment disorder",ipa:"/əˈdʒʌstmənt dɪsˈɔːdə/",pos:"n. 专业术语",cn:"适应障碍——面对重大压力或变故（如确诊重病、失业、丧亲）后出现的情绪或行为反应，程度超出正常范围但通常可随时间缓解。",ex:"He was treated for an adjustment disorder after the diagnosis."}
+};
+
+/* ============ 状态 ============ */
+var done = {};
+var curWord = null;
+
+/* ============ 滚动进度 ============ */
+var bar = document.getElementById('bar');
+window.addEventListener('scroll', function(){
+  var h = document.documentElement.scrollHeight - window.innerHeight;
+  var p = h > 0 ? (window.scrollY / h) * 100 : 0;
+  bar.style.width = Math.min(100, Math.max(0, p)) + '%';
+}, {passive:true});
+
+/* ============ 字号 ============ */
+var scale = 1;
+function applyScale(){
+  document.documentElement.style.setProperty('--fscale', scale);
+  curWord = curWord; // no-op
+}
+document.getElementById('fup').onclick = function(){ scale = Math.min(1.4, scale + 0.08); applyScale(); toast('正文字号 ' + Math.round(scale*100) + '%'); };
+document.getElementById('fdown').onclick = function(){ scale = Math.max(0.82, scale - 0.08); applyScale(); toast('正文字号 ' + Math.round(scale*100) + '%'); };
+
+/* ============ 提示条 ============ */
+var toastEl = document.getElementById('toast'), tTimer = null;
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('on');
+  clearTimeout(tTimer);
+  tTimer = setTimeout(function(){ toastEl.classList.remove('on'); }, 1500);
+}
+
+/* ============ 弹层 ============ */
+var mask = document.getElementById('mask'), sheet = document.getElementById('sheet');
+function openSheet(key){
+  var d = W[key];
+  if(!d) return;
+  curWord = key;
+  document.getElementById('shw').textContent = d.w;
+  document.getElementById('shipa').textContent = d.ipa;
+  var bd = document.getElementById('shbadge');
+  bd.textContent = d.t === 't' ? '专业术语' : '通用生词';
+  bd.className = 'sh-badge ' + d.t;
+  document.getElementById('shpos').textContent = d.pos;
+  document.getElementById('shcn').textContent = d.cn;
+  document.getElementById('shex').innerHTML = '<span class="lbl">EXAMPLE</span>' + d.ex;
+  var mb = document.getElementById('shmark');
+  mb.textContent = done[key] ? '取消标记' : '标记已掌握';
+  mb.className = 'btn ' + (done[key] ? 'ok' : 'primary');
+  mask.classList.add('on');
+  sheet.classList.add('on');
+}
+function closeSheet(){ mask.classList.remove('on'); sheet.classList.remove('on'); curWord = null; }
+mask.onclick = closeSheet;
+document.getElementById('shclose').onclick = closeSheet;
+
+document.getElementById('shmark').onclick = function(){
+  if(!curWord) return;
+  if(done[curWord]){ delete done[curWord]; toast('已取消标记'); }
+  else { done[curWord] = 1; toast('已标记为掌握 ✓'); }
+  paintDone();
+  renderList(curTab);
+  closeSheet();
+};
+
+/* 正文点击 */
+document.querySelectorAll('.m').forEach(function(el){
+  el.addEventListener('click', function(){
+    var k = el.getAttribute('data-w');
+    if(done[k]) { toast('已标记掌握，长按可取消'); }
+    openSheet(k);
+  });
+  el.addEventListener('contextmenu', function(e){
+    e.preventDefault();
+    var k = el.getAttribute('data-w');
+    if(k) openSheet(k);
+  });
+});
+
+function paintDone(){
+  document.querySelectorAll('.m').forEach(function(el){
+    var k = el.getAttribute('data-w');
+    if(done[k]) el.classList.add('done'); else el.classList.remove('done');
+  });
+}
+
+/* ============ 词汇表 ============ */
+var curTab = 'v';
+function renderList(tab){
+  curTab = tab;
+  var host = document.getElementById('glist');
+  var keys = Object.keys(W).filter(function(k){ return W[k].t === tab; });
+  var html = '';
+  keys.forEach(function(k){
+    var d = W[k];
+    var isDone = !!done[k];
+    html += '<div class="gitem" data-k="' + k + '">'
+      + '<span class="dot ' + d.t + '"></span>'
+      + '<div style="flex:1;min-width:0;">'
+      +   '<div class="gw" style="' + (isDone ? 'text-decoration:line-through;opacity:.45;' : '') + '">' + d.w + '</div>'
+      +   '<div class="gcn">' + d.pos + ' · ' + d.cn.split('。')[0] + '。</div>'
+      + '</div>'
+      + '<span class="go">›</span>'
+      + '</div>';
+  });
+  host.innerHTML = html;
+  host.querySelectorAll('.gitem').forEach(function(el){
+    el.onclick = function(){ openSheet(el.getAttribute('data-k')); };
+  });
+}
+document.querySelectorAll('.tab').forEach(function(b){
+  b.onclick = function(){
+    document.querySelectorAll('.tab').forEach(function(x){ x.classList.remove('on'); });
+    b.classList.add('on');
+    renderList(b.getAttribute('data-tab'));
+  };
+});
+
+/* 计数 */
+var vc = 0, tc = 0;
+Object.keys(W).forEach(function(k){ W[k].t === 't' ? tc++ : vc++; });
+document.getElementById('vcount').textContent = vc;
+document.getElementById('tcount').textContent = tc;
+document.getElementById('tv').textContent = '(' + vc + ')';
+document.getElementById('tt').textContent = '(' + tc + ')';
+renderList('v');
+</script>
+</body>
+</html>

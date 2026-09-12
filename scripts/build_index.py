@@ -43,7 +43,7 @@ def render_index_html(items):
           <span class="c-cat">{esc(a.get('category',''))}</span>
         </div>
         <div class="c-title">{esc(a['title'])}</div>
-        <div class="c-meta">{a.get('words','')} 词 · 生词 {a.get('vocabCount','')} · 术语 {a.get('termCount','')} · {esc(a.get('level',''))}</div>
+        <div class="c-meta">原文 {esc(a.get('pubDate',''))} · {a.get('words','')} 词 · 生词 {a.get('vocabCount','')} · 术语 {a.get('termCount','')} · {esc(a.get('level',''))}</div>
       </a>''')
 
     total_words = sum(int(a.get("words") or 0) for a in items)
@@ -120,12 +120,12 @@ def render_readme_table(items):
     items = sorted(items, key=lambda x: x["date"], reverse=True)
     if not items:
         return "| 日期 | 来源 | 标题 | 词数 | 生词 | 术语 |\n|---|---|---|---|---|---|\n| — | — | 暂无 | — | — | — |"
-    lines = ["| 日期 | 来源 | 标题 | 词数 | 生词 | 术语 | 链接 |",
-             "|---|---|---|---:|---:|---:|---|"]
+    lines = ["| 期号 | 推送日 | 原文日 | 来源 | 标题 | 词数 | 生词 | 术语 | 链接 |",
+             "|---|---|---|---|---|---:|---:|---:|---|"]
     for a in items:
         lines.append(
-            f"| {a['date']} | {a['source']} | [{a['title']}]({a['url']}) | "
-            f"{a.get('words','')} | {a.get('vocabCount','')} | {a.get('termCount','')} | "
+            f"| {a.get('episode','')} | {a['date']} | {a.get('pubDate','')} | {a['source']} | "
+            f"{a['title']} | {a.get('words','')} | {a.get('vocabCount','')} | {a.get('termCount','')} | "
             f"[HTML]({a['url']}) · [TXT]({a.get('txt', a['url'])}) |"
         )
     return "\n".join(lines)
