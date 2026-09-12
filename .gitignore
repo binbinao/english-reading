@@ -2,3 +2,9 @@
 *.tmp
 .workbuddy/
 Thumbs.db
+
+# 防呆：任何情况下都别把凭据提交进来
+.secrets/
+*.pat
+*.env
+.env*

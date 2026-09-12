@@ -30,6 +30,37 @@ WorkBuddy 微信小程序的**「云端工作」模式**把任务跑在腾讯云
 5. **Permissions** → Repository permissions → **Contents: Read and write**（其余全部留 No access）
 6. 生成，复制出来的是一串以 `github_pat_` 开头的长字符串
 
+### ⚠️ 必须选「Read and write」，选成「Read」会静默失败
+
+实测踩过的坑：权限选成 **Read** 时，`git clone` 会**成功**（读没问题），但 `git push` 会报 403：
+
+```
+remote: Permission to binbinao/english-reading.git denied to binbinao.
+fatal: unable to access 'https://github.com/binbinao/english-reading.git/': The requested URL returned error: 403
+```
+
+这个失败**只在跑的最后一刻才出现**，前面选文、排版、校验全部正常，很容易误以为配置没问题。
+
+另外注意：`GET /repos/{owner}/{repo}` 返回的 `permissions` 字段显示的是**你账号的仓库角色**（会是 `admin: true`），**不代表 token 的实际权限**。用这个字段判断 token 能不能写是错的。
+
+### 验证 PAT 真的能写（30 秒，建议一次性做掉）
+
+```bash
+PAT=<你的 token>
+rm -rf /tmp/patcheck && git clone -q "https://$PAT@github.com/binbinao/english-reading.git" /tmp/patcheck
+cd /tmp/patcheck && git config user.email "binbinao@users.noreply.github.com" && git config user.name "jiduobin"
+git commit -q --allow-empty -m probe && git push -q origin HEAD:pat-check && echo "✅ 可写"
+git push -q origin --delete pat-check; cd /tmp && rm -rf /tmp/patcheck
+```
+
+输出 `✅ 可写` 才说明配置正确；报 403 就回第 5 步把 Contents 改成 **Read and write**。
+
+### 关于 Pages 权限（与云端任务无关）
+
+启用 GitHub Pages 站点需要单独的 **Pages: Read and write** 权限，**云端任务并不需要它**
+（Pages 是"从分支部署"，每次 push 后自动重建）。所以日常任务的 token 保持 Contents 读写即可，
+不要为了开 Pages 而额外放宽权限。详见下面「启用 Pages」一节。
+
 ⚠️ 安全约束（务必遵守）：
 - 这个 token 只对**这一个仓库**有读写权，泄了也伤不到别的项目
 - 它会以明文出现在自动化任务的提示词里 —— 属于可接受范围，但**不要**把它写进仓库任何文件，也不要贴到聊天/文档里
@@ -120,6 +151,40 @@ date = 推送日；pubDate = 原文发表日期。
   并在最终回复里说明偏离原因。绝不编造。
 - 不要改动 template/ 与 scripts/ 下的既有文件，除非发现真实 bug（发现则修好并说明）。
 ```
+
+---
+
+## 启用 Pages（让手机上能直接打开归档首页）
+
+Pages 站点目前**尚未启用**（`GET /repos/.../pages` 返回 404，`has_pages: false`）。
+启用后归档首页就是 <https://binbinao.github.io/english-reading/>，手机上点开即可阅读。
+
+启用方式二选一：
+
+**A. 网页点一下（推荐，不扩大 token 权限）**
+
+<https://github.com/binbinao/english-reading/settings/pages>
+→ **Source** 选 `Deploy from a branch` → **Branch** 选 `main` / `(root)` → 保存
+
+**B. 用 API（需要 token 额外具备 Pages 权限）**
+
+```bash
+curl -X POST -H "Authorization: Bearer $PAT" -H "Accept: application/vnd.github+json" \
+  https://api.github.com/repos/binbinao/english-reading/pages \
+  -d '{"source":{"branch":"main","path":"/"}}'
+```
+
+实测：只给 Contents 读写的 token 调这个接口会返回
+`403 Resource not accessible by personal access token`。
+注意 **Pages 权限 ≠ Contents 权限**，即使仓库角色是 `admin` 也不管用 —— 细粒度 token 必须单独勾选 Pages。
+
+### 已试过、确认不可行的做法（别重复踩）
+
+用 GitHub Actions 自动启用 Pages（`actions/configure-pages@v5` 配 `enablement: true`）——
+运行会失败：`Create Pages site failed. Error: Resource not accessible by integration`。
+**`GITHUB_TOKEN` 无权创建 Pages 站点**，这条路堵死（曾加过工作流，已撤回，见 commit `0a2914d`）。
+
+启用后每次 `git push` 都会自动重建站点，无需任何后续操作。
 
 ---
 
