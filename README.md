@@ -5,6 +5,9 @@
 
 > 在线阅读：<https://binbinao.github.io/english-reading/>
 
+> 定时执行方式：见 [SETUP-CLOUD.md](SETUP-CLOUD.md) —— 迁移到 WorkBuddy「云端工作」模式的做法，
+> 迁完就不再依赖本地电脑开机。
+
 ---
 
 ## 每日产物长什么样
